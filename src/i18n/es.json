@@ -6,6 +6,7 @@
     "submit": "Ingresar",
     "forgot": "¿Olvidaste tu contraseña?",
     "noAccount": "¿No tienes cuenta?",
-    "register": "Regístrate"
+    "register": "Regístrate",
+    "loading": "Cargando..."
   }
 }
