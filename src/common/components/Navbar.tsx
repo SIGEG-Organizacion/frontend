@@ -17,8 +17,8 @@ const Navbar: React.FC = () => {
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="text-xl font-bold">
-            SIGEV
+          <Link to="/" className="text-xl font-bold flex items-center">
+            <p>SI</p><p className='text-blue-500'>GEV</p>
           </Link>
 
           <div className="flex space-x-4">
@@ -28,25 +28,26 @@ const Navbar: React.FC = () => {
 
             {user ? (
               <>
-                <Link to="/dashboard" className="hover:underline">
-                  {t('navbar.dashboard')}
-                </Link>
-
                 {/* Opciones según rol */}
-                {user.role === 'admin' && (
-                  <Link to="/admin/users" className="hover:underline">
-                    {t('navbar.users')}
-                  </Link>
+                {(user.role === 'adminTFG' || user.role === 'adminLink') && (
+                  <>
+                    <Link to="/admin/users" className="hover:underline">
+                      {t('navbar.users')}
+                    </Link>
+                    <Link to="/profile" className="hover:underline">
+                      {t('navbar.profile')}
+                    </Link>
+                  </>
                 )}
 
                 {user.role === 'company' && (
-                  <Link to="/company/profile" className="hover:underline">
+                  <Link to="/profile" className="hover:underline">
                     {t('navbar.profile')}
                   </Link>
                 )}
 
                 {user.role === 'student' && (
-                  <Link to="/student/profile" className="hover:underline">
+                  <Link to="/profile" className="hover:underline">
                     {t('navbar.profile')}
                   </Link>
                 )}

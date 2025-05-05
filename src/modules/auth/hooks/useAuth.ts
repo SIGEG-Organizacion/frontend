@@ -8,6 +8,7 @@ export interface UseAuthReturn {
   error: string | null
   login: (credentials: Credentials) => Promise<void>
   logout: () => void
+  updateProfile: (data: Partial<User>) => Promise<User>
   // opcional: refreshToken: () => Promise<void>
 }
 

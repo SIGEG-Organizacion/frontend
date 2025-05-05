@@ -81,6 +81,11 @@ const getProfile = async (): Promise<User> => {
   return data
 }
 
+const updateProfile = async (data: Partial<User>): Promise<User> => {
+  const { data: updated } = await api.put<User>('/me', data)
+  return updated
+}
+
 export default {
   login,
   registerStudent,
@@ -89,4 +94,5 @@ export default {
   forgotPassword,
   resetPassword,
   getProfile,
+  updateProfile,
 }

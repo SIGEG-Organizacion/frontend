@@ -11,7 +11,7 @@ const RegisterCompanyPage: React.FC = () => {
   const navigate = useNavigate()
 
   const [form, setForm] = useState<RegisterCompanyData>({
-    companyName: '',
+    name: '',
     email: '',
     password: '',
     sector: '',
@@ -52,14 +52,14 @@ const RegisterCompanyPage: React.FC = () => {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="companyName" className="block mb-1 font-medium">
+          <label htmlFor="name" className="block mb-1 font-medium">
             {t('registerCompany.companyName')}
           </label>
           <input
-            id="companyName"
-            name="companyName"
+            id="name"
+            name="name"
             type="text"
-            value={form.companyName}
+            value={form.name}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"

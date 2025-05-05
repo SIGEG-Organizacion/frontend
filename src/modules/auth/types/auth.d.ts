@@ -1,9 +1,16 @@
+export type AdminRole = 'adminTFG' | 'adminLink'
+
 // Represents an authenticated user
 export interface User {
   id: string
   name: string
   email: string
-  role: 'student' | 'company' | 'admin'
+  role: 'student' | 'company' | AdminRole
+
+  // Optional properties based on user role
+  studentId?: string  
+  sector?: string     
+  phone?: string 
 }
 
 // Login credentials
@@ -21,7 +28,7 @@ export interface RegisterStudentData {
 }
 
 export interface RegisterCompanyData {
-  companyName: string
+  name: string
   email: string
   password: string
   sector: string

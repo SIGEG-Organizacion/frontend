@@ -17,6 +17,7 @@ interface AuthContextType {
   error: string | null
   login: (credentials: Credentials) => Promise<void>
   logout: () => void
+  updateProfile: (data: Partial<User>) => Promise<User>
   // optional: refreshToken: () => Promise<void>
 }
 
@@ -80,9 +81,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     setUser(null)
   }
 
+  const updateProfile = async (data: Partial<User>) => {
+    setLoading(true)
+    setError(null)
+    try {
+      const updated = await authService.updateProfile(data)
+      setUser(updated)
+      return updated
+    } catch (err: any) {
+      setError(err.response?.data?.message ?? err.message)
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, error, login, logout }}
+      value={{ user, loading, error, login, logout, updateProfile }}
     >
       {children}
     </AuthContext.Provider>

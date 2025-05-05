@@ -75,5 +75,50 @@
     "title": "Página No Encontrada",
     "message": "La página que buscas no existe.",
     "backHome": "Volver al Inicio"
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "noUser": "Ningún usuario autenticado.",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "publications": "Publicaciones",
+    "editInfo": "Editar información",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "cancel": "Cancelar",
+    "updateSuccess": "¡Perfil actualizado con éxito!",
+    "roleNames": {
+      "student": "Estudiante",
+      "company": "Empresa",
+      "adminTGF": "Administrador TFG",
+      "adminLink": "Administrador Vinculación"
+    }
+  },
+  "userMgmt": {
+    "title": "Control de Usuarios",
+    "searchPlaceholder": "Buscar por nombre o correo…",
+    "filterAll": "Todos los Roles",
+    "loading": "Cargando usuarios…",
+    "noResults": "No se encontraron usuarios.",
+    "table": {
+      "name": "Nombre",
+      "graduation": "Fecha de graduación",
+      "role": "Tipo de usuario",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "actions": "Acciones"
+    },
+    "role": {
+      "student": "Estudiante",
+      "company": "Empresa",
+      "adminTGF": "Administrador TFG",
+      "adminLink": "Administrador Vinculación"
+    },
+    "actions": {
+      "delete": "Eliminar",
+      "graduate": "Cambiar a egresado"
+    },
+    "confirmDelete": "¿Seguro que deseas eliminar este usuario?"
   }
 }
