@@ -1,0 +1,57 @@
+// Represents an authenticated user
+export interface User {
+  id: string
+  name: string
+  email: string
+  role: 'student' | 'company' | 'admin'
+}
+
+// Login credentials
+export interface Credentials {
+  email: string
+  password: string
+}
+
+// Student registration payload
+export interface RegisterStudentData {
+  name: string
+  email: string
+  password: string
+  studentNumber: string
+}
+
+// Enterprise registration payload
+export interface RegisterCompanyData {
+  companyName: string
+  email: string
+  password: string
+  companyId: string
+}
+
+// Administrador registration payload
+export interface RegisterAdminData {
+  email: string
+  password: string
+  adminCode: string
+}
+
+// API response when logging in
+export interface LoginResponse {
+  user: User
+  token: string
+}
+
+// Generic API error response
+export interface ErrorResponse {
+  message: string
+}
+
+// Payload to request password recovery
+export interface ForgotPasswordData {
+  email: string
+}
+
+// Response when requesting password recovery
+export interface ForgotPasswordResponse {
+  message: string
+}
