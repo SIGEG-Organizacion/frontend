@@ -20,12 +20,12 @@ export interface RegisterStudentData {
   studentId: string
 }
 
-// Enterprise registration payload
 export interface RegisterCompanyData {
   companyName: string
   email: string
   password: string
   sector: string
+  phone: string
 }
 
 // Administrador registration payload

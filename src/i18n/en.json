@@ -35,6 +35,7 @@
     "title": "Register as Company",
     "companyName": "Company Name",
     "sector": "Sector",
+    "phone": "Phone Number",
     "email": "Email",
     "password": "Password",
     "submit": "Register",

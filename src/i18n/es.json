@@ -35,6 +35,7 @@
     "title": "Registro de Empresa",
     "companyName": "Nombre de la Empresa",
     "sector": "Sector",
+    "phone": "Número Telefónico",
     "email": "Correo Electrónico",
     "password": "Contraseña",
     "submit": "Registrarse",

@@ -1,3 +1,4 @@
+// src/modules/auth/pages/RegisterCompanyPage.tsx
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +16,7 @@ const RegisterCompanyPage: React.FC = () => {
     email: '',
     password: '',
     sector: '',
+    phone: '',
   })
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -47,16 +49,8 @@ const RegisterCompanyPage: React.FC = () => {
           {t('registerCompany.title')}
         </h1>
 
-        {error && (
-          <ValidationMessage type="error">
-            {error}
-          </ValidationMessage>
-        )}
-        {success && (
-          <ValidationMessage type="success">
-            {success}
-          </ValidationMessage>
-        )}
+        {error && <ValidationMessage type="error">{error}</ValidationMessage>}
+        {success && <ValidationMessage type="success">{success}</ValidationMessage>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -83,6 +77,21 @@ const RegisterCompanyPage: React.FC = () => {
               name="sector"
               type="text"
               value={form.sector}
+              onChange={handleChange}
+              required
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block mb-1 font-medium">
+              {t('registerCompany.phone')}
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={form.phone}
               onChange={handleChange}
               required
               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
@@ -135,7 +144,7 @@ const RegisterCompanyPage: React.FC = () => {
         </div>
 
         <div className="mt-2 text-center">
-          <Link to="/login" className="text-sm text-gray-500 hover:underline">
+          <Link to="/register" className="text-sm text-gray-500 hover:underline">
             {t('register.backToLogin')}
           </Link>
         </div>
