@@ -3,16 +3,18 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useTranslation } from 'react-i18next'
+import PasswordInput from '../components/PasswordInput'
+import ValidationMessage from '../components/ValidationMessage'
 
 const LoginPage: React.FC = () => {
   const { t } = useTranslation()
   const { login } = useAuth()
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -22,71 +24,72 @@ const LoginPage: React.FC = () => {
       await login({ email, password })
       navigate('/dashboard', { replace: true })
     } catch (err: any) {
-      setError(err.message || 'Error al iniciar sesión')
+      setError(err.response?.data?.message ?? err.message)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="max-w-md mx-auto mt-16 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold mb-6 text-center">{t('login.title')}</h1>
+    <div className="h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          {t('login.title')}
+        </h1>
 
-      {error && (
-        <div className="mb-4 text-red-700 bg-red-100 border border-red-300 rounded p-3">
-          {error}
+        {error && (
+          <ValidationMessage type="error">
+            {error}
+          </ValidationMessage>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block mb-1 font-medium">
+              {t('login.email')}
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block mb-1 font-medium">
+              {t('login.password')}
+            </label>
+            <PasswordInput
+              id="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+          >
+            {loading ? t('login.loading') : t('login.submit')}
+          </button>
+        </form>
+
+        <div className="mt-4 text-center">
+          <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
+            {t('login.forgot')}
+          </Link>
         </div>
-      )}
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-1 font-medium">
-            {t('login.email')}
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
-          />
+        <div className="mt-2 text-center text-sm">
+          {t('login.noAccount')}{' '}
+          <Link to="/register" className="text-blue-600 hover:underline">
+            {t('login.register')}
+          </Link>
         </div>
-
-        <div className="mb-6">
-          <label htmlFor="password" className="block mb-1 font-medium">
-            {t('login.password')}
-          </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          {loading ? t('login.loading') : t('login.submit')}
-        </button>
-      </form>
-
-      <div className="mt-4 text-center">
-        <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
-          {t('login.forgotPassword')}
-        </Link>
-      </div>
-
-      <div className="mt-2 text-center text-sm">
-        {t('login.noAccount')}{' '}
-        <Link to="/register/student" className="text-blue-600 hover:underline">
-          {t('login.register')}
-        </Link>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@ export interface RegisterStudentData {
   name: string
   email: string
   password: string
-  studentNumber: string
+  studentId: string
 }
 
 // Enterprise registration payload
@@ -25,7 +25,7 @@ export interface RegisterCompanyData {
   companyName: string
   email: string
   password: string
-  companyId: string
+  sector: string
 }
 
 // Administrador registration payload

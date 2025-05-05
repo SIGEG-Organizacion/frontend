@@ -4,9 +4,51 @@
     "email": "Correo Electrónico",
     "password": "Contraseña",
     "submit": "Ingresar",
+    "loading": "Ingresando...",
     "forgot": "¿Olvidaste tu contraseña?",
     "noAccount": "¿No tienes cuenta?",
-    "register": "Regístrate",
-    "loading": "Cargando..."
+    "register": "Regístrate"
+  },
+  "register": {
+    "selectRole": "Registrarse como…",
+    "student": {
+      "title": "Estudiante"
+    },
+    "company": {
+      "title": "Empresa"
+    },
+    "backToLogin": "Volver a Iniciar Sesión"
+  },
+  "registerStudent": {
+    "title": "Registro de Estudiante",
+    "name": "Nombre Completo",
+    "studentId": "ID de Estudiante",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "submit": "Registrarse",
+    "loading": "Registrando...",
+    "success": "¡Registro exitoso! Ya puedes iniciar sesión.",
+    "alreadyHave": "¿Ya tienes cuenta?",
+    "login": "Iniciar Sesión"
+  },
+  "registerCompany": {
+    "title": "Registro de Empresa",
+    "companyName": "Nombre de la Empresa",
+    "sector": "Sector",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "submit": "Registrarse",
+    "loading": "Registrando...",
+    "success": "¡Registro exitoso! Ya puedes iniciar sesión.",
+    "alreadyHave": "¿Ya tienes cuenta?",
+    "login": "Iniciar Sesión"
+  },
+  "forgotPassword": {
+    "title": "Recuperar Contraseña",
+    "email": "Correo Electrónico",
+    "submit": "Enviar Enlace",
+    "loading": "Enviando...",
+    "success": "Si ese correo está registrado, recibirás un enlace para restablecer la contraseña.",
+    "backToLogin": "Volver a Iniciar Sesión"
   }
 }

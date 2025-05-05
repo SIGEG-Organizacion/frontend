@@ -4,9 +4,51 @@
     "email": "Email",
     "password": "Password",
     "submit": "Log In",
-    "forgotPassword": "Forgot password?",
+    "loading": "Logging In...",
+    "forgot": "Forgot password?",
     "noAccount": "Don't have an account?",
-    "register": "Register",
-    "loading": "Loading..."
+    "register": "Register"
+  },
+  "register": {
+    "selectRole": "Register as…",
+    "student": {
+      "title": "Student"
+    },
+    "company": {
+      "title": "Company"
+    },
+    "backToLogin": "Back to Sign In"
+  },
+  "registerStudent": {
+    "title": "Register as Student",
+    "name": "Full Name",
+    "studentId": "Student ID",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Register",
+    "loading": "Registering...",
+    "success": "Registration successful! You can now log in.",
+    "alreadyHave": "Already have an account?",
+    "login": "Sign In"
+  },
+  "registerCompany": {
+    "title": "Register as Company",
+    "companyName": "Company Name",
+    "sector": "Sector",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Register",
+    "loading": "Registering...",
+    "success": "Registration successful! You can now log in.",
+    "alreadyHave": "Already have an account?",
+    "login": "Sign In"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "email": "Email",
+    "submit": "Send Reset Link",
+    "loading": "Sending...",
+    "success": "If that email is registered, you'll receive a link to reset your password.",
+    "backToLogin": "Back to Sign In"
   }
 }
