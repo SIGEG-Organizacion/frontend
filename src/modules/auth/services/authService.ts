@@ -13,9 +13,9 @@ import type {
 
 // Apunta a donde montas userRoutes en tu servidor:
 const API_URL = import.meta.env.VITE_API_URL
-                 || 'http://localhost:4000/api/users'
+                 || 'http://localhost:5000/api'
 
-const api = axios.create({ baseURL: API_URL })
+const api = axios.create({ baseURL: API_URL + '/users' })
 
 // Pone el token en cada petición si existe
 api.interceptors.request.use((config) => {

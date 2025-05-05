@@ -51,5 +51,29 @@
     "loading": "Sending...",
     "success": "If that email is registered, you'll receive a link to reset your password.",
     "backToLogin": "Back to Sign In"
+  },
+  "navbar": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "users": "User Management",
+    "profile": "Profile",
+    "login": "Sign In",
+    "register": "Register",
+    "logout": "Log Out"
+  },
+  "home": {
+    "welcome": "Welcome, {{name}}!",
+    "guest": "guest",
+    "intro": {
+      "student": "Find opportunities and academic resources.",
+      "company": "Manage your company information and service offerings.",
+      "admin": "Manage users, roles, and system settings.",
+      "guest": "Please sign in or register to continue."
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist.",
+    "backHome": "Go back to Home"
   }
 }

@@ -51,5 +51,29 @@
     "loading": "Enviando...",
     "success": "Si ese correo está registrado, recibirás un enlace para restablecer la contraseña.",
     "backToLogin": "Volver a Iniciar Sesión"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "users": "Gestión de Usuarios",
+    "profile": "Perfil",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión"
+  },
+  "home": {
+    "welcome": "¡Bienvenido, {{name}}!",
+    "guest": "invitado",
+    "intro": {
+      "student": "Encuentra aquí oportunidades de prácticas y recursos académicos.",
+      "company": "Administra tu información de empresa y oferta de servicios.",
+      "admin": "Gestiona usuarios, roles y la configuración del sistema.",
+      "guest": "Por favor inicia sesión o regístrate para continuar."
+    }
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "message": "La página que buscas no existe.",
+    "backHome": "Volver al Inicio"
   }
 }
