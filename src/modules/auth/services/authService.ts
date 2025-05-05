@@ -1,21 +1,23 @@
+// src/modules/auth/services/authService.ts
 import axios from 'axios'
 import type {
   Credentials,
   LoginResponse,
+  ForgotPasswordResponse,
   RegisterStudentData,
   RegisterCompanyData,
   RegisterAdminData,
-  ForgotPasswordData,
-  ForgotPasswordResponse,
+  ResetPasswordData,
   User,
 } from '../types/auth'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+// Apunta a donde montas userRoutes en tu servidor:
+const API_URL = import.meta.env.VITE_API_URL
+                 || 'http://localhost:4000/api/users'
 
-// Creates an Axios instance with the base URL of the API
 const api = axios.create({ baseURL: API_URL })
 
-// Interceptor to attach the JWT token in each request
+// Pone el token en cada petición si existe
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token && config.headers) {
@@ -24,57 +26,67 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Login function: sends email and password, receives user + token
+// Login: POST /api/users/login
 const login = async (
   credentials: Credentials
 ): Promise<LoginResponse> => {
-  const response = await api.post<LoginResponse>('/auth/login', credentials)
-  return response.data
+  const { data } = await api.post<LoginResponse>(
+    '/login',
+    credentials
+  )
+  return data
 }
 
-// Get the profile of the authenticated user
-const getProfile = async (): Promise<User> => {
-  const response = await api.get<User>('/auth/profile')
-  return response.data
-}
-
-// Register a student
+// Registro: POST /api/users/register
+// Nos olvidamos de /student, /company, /admin en la URL,
+// y enviamos role en el body:
 const registerStudent = async (
   data: RegisterStudentData
 ): Promise<void> => {
-  await api.post('/auth/register/student', data)
+  await api.post('/register', { ...data, role: 'student' })
 }
 
-// Register a company
 const registerCompany = async (
   data: RegisterCompanyData
 ): Promise<void> => {
-  await api.post('/auth/register/company', data)
+  await api.post('/register', { ...data, role: 'company' })
 }
 
-// Register an admin
 const registerAdmin = async (
   data: RegisterAdminData
 ): Promise<void> => {
-  await api.post('/auth/register/admin', data)
+  await api.post('/register', { ...data, role: 'admin' })
 }
 
-// Forgot password function: sends email and receives a response
+// Forgot / Reset password
 const forgotPassword = async (
-  data: ForgotPasswordData
+  payload: { email: string }
 ): Promise<ForgotPasswordResponse> => {
-  const response = await api.post<ForgotPasswordResponse>(
-    '/auth/forgot-password',
-    data
+  const { data } = await api.post<ForgotPasswordResponse>(
+    '/forgot-password',
+    payload
   )
-  return response.data
+  return data
+}
+
+const resetPassword = async (
+  payload: ResetPasswordData
+): Promise<void> => {
+  await api.post('/reset-password', payload)
+}
+
+// Perfil: GET /api/users/me
+const getProfile = async (): Promise<User> => {
+  const { data } = await api.get<User>('/me')
+  return data
 }
 
 export default {
   login,
-  getProfile,
   registerStudent,
   registerCompany,
   registerAdmin,
   forgotPassword,
+  resetPassword,
+  getProfile,
 }

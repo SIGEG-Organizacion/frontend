@@ -55,3 +55,9 @@ export interface ForgotPasswordData {
 export interface ForgotPasswordResponse {
   message: string
 }
+
+// Payload to reset password
+export interface ResetPasswordData {
+  token: string
+  password: string
+}
