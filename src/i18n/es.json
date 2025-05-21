@@ -59,7 +59,8 @@
     "profile": "Perfil",
     "login": "Iniciar Sesión",
     "register": "Registrarse",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "calendar": "Agenda"
   },
   "home": {
     "welcome": "¡Bienvenido, {{name}}!",
@@ -120,5 +121,23 @@
       "graduate": "Cambiar a egresado"
     },
     "confirmDelete": "¿Seguro que deseas eliminar este usuario?"
+  },
+  "calendar": {
+    "requests": {
+      "title": "Solicitudes de Agenda",
+      "table": {
+        "date": "Fecha",
+        "requester": "Solicitante",
+        "email": "Correo",
+        "time": "Hora",
+        "subject": "Asunto",
+        "mode": "Modalidad",
+        "actions": "Acciones"
+      },
+      "accept": "Aceptar",
+      "reject": "Rechazar",
+      "loading": "Cargando solicitudes…",
+      "noRequests": "No hay solicitudes pendientes."
+    }
   }
 }

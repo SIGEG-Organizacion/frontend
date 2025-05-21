@@ -59,7 +59,8 @@
     "profile": "Profile",
     "login": "Sign In",
     "register": "Register",
-    "logout": "Log Out"
+    "logout": "Log Out",
+    "calendar": "Calendar"
   },
   "home": {
     "welcome": "Welcome, {{name}}!",
@@ -121,5 +122,23 @@
       "graduate": "Mark Graduated"
     },
     "confirmDelete": "Are you sure you want to delete this user?"
+  },
+  "calendar": {
+    "requests": {
+      "title": "Calendar Requests",
+      "table": {
+        "date": "Date",
+        "requester": "Requester",
+        "email": "Email",
+        "time": "Time",
+        "subject": "Subject",
+        "mode": "Mode",
+        "actions": "Actions"
+      },
+      "accept": "Accept",
+      "reject": "Reject",
+      "loading": "Loading requests…",
+      "noRequests": "No pending requests."
+    }
   }
 }

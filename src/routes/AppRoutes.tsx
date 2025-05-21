@@ -13,6 +13,10 @@ import ForgotPasswordPage from '../modules/auth/pages/ForgotPasswordPage'
 import NotFoundPage from '../common/pages/404'
 import ProfilePage from '../common/pages/ProfilePage'
 import UserManagementPage from '../modules/admin/pages/UserManagementPage'
+import CalendarSyncPage from '../modules/calendar/pages/CalendarSyncPage'
+import CalendarCallbackPage from '../modules/calendar/pages/CalendarCallbackPage'
+import CalendarViewPage from '../modules/calendar/pages/CalendarViewPage'
+import CalendarRequestsPage from '../modules/calendar/pages/CalendarRequestsPage'
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth()
@@ -36,8 +40,15 @@ const AppRoutes: React.FC = () => {
           <Route path="/not-found" element={<NotFoundPage />} />
 
           {/* Admin-only route */}
-          { user?.role?.startsWith('admin') && (
-            <Route path="/admin/users" element={<UserManagementPage />} />
+          {user?.role?.startsWith('admin') && (
+            <>
+              <Route path="/admin/users" element={<UserManagementPage />} />
+
+              <Route path="/calendar" element={<CalendarViewPage />} />
+              <Route path="/calendar/sync" element={<CalendarSyncPage />} />
+              <Route path="/calendar/oauth/callback/:provider" element={<CalendarCallbackPage />} />
+              <Route path="/calendar/requests" element={<CalendarRequestsPage />} />
+            </>
           )}
 
           {/* Fallback 404 */}
