@@ -33,7 +33,7 @@ export interface RegisterCompanyData {
   email: string
   password: string
   sector: string
-  phone: string
+  phone_number: string
 }
 
 // Administrador registration payload

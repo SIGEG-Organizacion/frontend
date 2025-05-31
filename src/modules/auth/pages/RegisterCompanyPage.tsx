@@ -15,7 +15,7 @@ const RegisterCompanyPage: React.FC = () => {
     email: '',
     password: '',
     sector: '',
-    phone: '',
+    phone_number: '',
   })
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -82,14 +82,14 @@ const RegisterCompanyPage: React.FC = () => {
         </div>
 
         <div>
-          <label htmlFor="phone" className="block mb-1 font-medium">
+          <label htmlFor="phone_number" className="block mb-1 font-medium">
             {t('registerCompany.phone')}
           </label>
           <input
-            id="phone"
-            name="phone"
+            id="phone_number"
+            name="phone_number"
             type="tel"
-            value={form.phone}
+            value={form.phone_number}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
