@@ -24,6 +24,7 @@
     "name": "Nombre Completo",
     "studentId": "ID de Estudiante",
     "email": "Correo Electrónico",
+    "phoneNumber": "Número Telefónico (Incluye Código de País)",
     "password": "Contraseña",
     "submit": "Registrarse",
     "loading": "Registrando...",

@@ -23,6 +23,7 @@ export interface Credentials {
 export interface RegisterStudentData {
   name: string
   email: string
+  phone_number: string
   password: string
   studentId: string
 }

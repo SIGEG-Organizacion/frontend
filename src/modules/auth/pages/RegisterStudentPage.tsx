@@ -13,6 +13,7 @@ const RegisterStudentPage: React.FC = () => {
   const [form, setForm] = useState<RegisterStudentData>({
     name: '',
     email: '',
+    phone_number: '',
     password: '',
     studentId: '',
   })
@@ -74,6 +75,21 @@ const RegisterStudentPage: React.FC = () => {
             name="studentId"
             type="text"
             value={form.studentId}
+            onChange={handleChange}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone_number" className="block mb-1 font-medium">
+            {t('registerStudent.phoneNumber')}
+          </label>
+          <input
+            id="phone_number"
+            name="phone_number"
+            type="tel"
+            value={form.phone_number}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"

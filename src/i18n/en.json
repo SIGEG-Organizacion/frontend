@@ -24,6 +24,7 @@
     "name": "Full Name",
     "studentId": "Student ID",
     "email": "Email",
+    "phoneNumber": "Phone Number (Include Country Code)",
     "password": "Password",
     "submit": "Register",
     "loading": "Registering...",
