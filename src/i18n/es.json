@@ -140,5 +140,19 @@
       "loading": "Cargando solicitudes…",
       "noRequests": "No hay solicitudes pendientes."
     }
+  },
+  "company": {
+    "dashboard": {
+      "title": "Panel de Empresa",
+      "totalViews": "Total de Vistas",
+      "totalApplications": "Total de Solicitudes",
+      "totalPublications": "Total de Publicaciones",
+      "publications": "Publicaciones",
+      "filterByName": "Filtrar por Nombre de Publicación",
+      "filterByNamePlaceholder": "Ingresa el nombre de la publicación…",
+      "filterDateFrom": "Desde la Fecha",
+      "filterDateTo": "Fecha Hasta",
+      "applyFilters": "Aplicar Filtros"
+    }
   }
 }

@@ -44,9 +44,15 @@ const Navbar: React.FC = () => {
                 )}
 
                 {user.role === 'company' && (
-                  <Link to="/profile" className="hover:underline">
-                    {t('navbar.profile')}
-                  </Link>
+                  <>
+                    <Link to="/dashboard" className="hover:underline">
+                      {t('navbar.dashboard')}
+                    </Link>
+
+                    <Link to="/profile" className="hover:underline">
+                      {t('navbar.profile')}
+                    </Link>
+                  </>
                 )}
 
                 {user.role === 'student' && (

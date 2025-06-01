@@ -19,6 +19,7 @@ import CalendarViewPage from "../modules/calendar/pages/CalendarViewPage";
 import CalendarRequestsPage from "../modules/calendar/pages/CalendarRequestsPage";
 
 import InterestsPage from "../modules/ee/pages/InterestPage";
+import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -41,6 +42,13 @@ const AppRoutes: React.FC = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/ee/interests" element={<InterestsPage />} />
           <Route path="/not-found" element={<NotFoundPage />} />
+
+          {/* Company routes */}
+          {user?.role === "company" && (
+            <>
+              <Route path="/dashboard" element={<CompanyDashboardPage />} />
+            </>
+          )}
 
           {/* Admin-only route */}
           {user?.role?.startsWith("admin") && (

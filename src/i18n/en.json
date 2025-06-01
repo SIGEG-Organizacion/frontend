@@ -141,5 +141,19 @@
       "loading": "Loading requests…",
       "noRequests": "No pending requests."
     }
+  },
+  "company": {
+    "dashboard": {
+      "title": "Company Dashboard",
+      "totalViews": "Total Views",
+      "totalApplications": "Total Applications",
+      "totalPublications": "Total Publications",
+      "publications": "Publications",
+      "filterByName": "Filter by Publication Name",
+      "filterByNamePlaceholder": "Enter publication name…",
+      "filterDateFrom": "From Date",
+      "filterDateTo": "To Date",
+      "applyFilters": "Apply Filters"
+    }
   }
 }
