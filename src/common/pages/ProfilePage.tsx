@@ -52,7 +52,7 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 container mx-auto">
       <div className="bg-white shadow rounded-lg p-6 space-y-4">
         <h1 className="text-2xl font-semibold">
           {t('profile.title')}
