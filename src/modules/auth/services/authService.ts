@@ -77,8 +77,8 @@ const resetPassword = async (
 
 // Perfil: GET /api/users/me
 const getProfile = async (): Promise<User> => {
-  const { data } = await api.get<User>('/me')
-  return data
+  const { data } = await api.get<{ user: User }>('/me')
+  return data.user
 }
 
 const updateProfile = async (data: Partial<User>): Promise<User> => {

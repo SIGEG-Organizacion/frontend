@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     if (token) {
       authService
         .getProfile()
-        .then((fetchedUser) => {
+        .then((fetchedUser: User) => {
           setUser(fetchedUser)
         })
         .catch(() => {

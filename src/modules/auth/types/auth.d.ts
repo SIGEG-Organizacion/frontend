@@ -6,11 +6,11 @@ export interface User {
   name: string
   email: string
   role: 'student' | 'company' | AdminRole
+  phone_number: string
 
   // Optional properties based on user role
   studentId?: string  
   sector?: string     
-  phone?: string 
 }
 
 // Login credentials

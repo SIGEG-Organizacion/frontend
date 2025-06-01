@@ -9,14 +9,16 @@ const ProfilePage: React.FC = () => {
   const { t } = useTranslation()
 
   const [isEditing, setIsEditing] = useState(false)
-  const [phone, setPhone] = useState(user?.phone ?? '')
+  const [phone_number, setPhoneNumber] = useState(user?.phone_number ?? '')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
   // Sync phone field when user changes
   useEffect(() => {
-    setPhone(user?.phone ?? '')
+    if (user) {
+      setPhoneNumber(user.phone_number ?? '')
+    }
   }, [user])
 
   if (!user) {
@@ -32,7 +34,7 @@ const ProfilePage: React.FC = () => {
     setSuccess(null)
     setLoading(true)
     try {
-      await updateProfile({ phone })
+      await updateProfile({ phone_number })
       setSuccess(t('profile.updateSuccess'))
       setIsEditing(false)
     } catch (err: any) {
@@ -46,7 +48,7 @@ const ProfilePage: React.FC = () => {
     setIsEditing(false)
     setError(null)
     setSuccess(null)
-    setPhone(user.phone ?? '')
+    setPhoneNumber(user.phone_number ?? '')
   }
 
   return (
@@ -71,13 +73,13 @@ const ProfilePage: React.FC = () => {
             {isEditing ? (
               <input
                 type="tel"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
+                value={phone_number}
+                onChange={e => setPhoneNumber(e.target.value)}
                 required
                 className="w-32 border rounded px-2 py-1 focus:outline-none focus:ring"
               />
             ) : (
-              user.phone || '—'
+              user.phone_number || '—'
             )}
           </div>
 
