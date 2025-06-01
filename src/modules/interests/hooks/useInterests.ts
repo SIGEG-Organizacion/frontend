@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { InterestsContext } from "../context/InterestContext";
-import type { Interest } from "../../../types/interest";
+import type { Interest } from "../types/interest";
 
 export interface UseInterestsReturn {
   interests: Interest[];

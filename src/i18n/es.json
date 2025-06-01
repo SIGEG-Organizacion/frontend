@@ -154,5 +154,24 @@
       "filterDateTo": "Fecha Hasta",
       "applyFilters": "Aplicar Filtros"
     }
+  },
+  "interests": {
+    "title": "Mis intereses",
+    "loading": "Cargando intereses...",
+    "error": "Error al cargar intereses.",
+    "empty": "No tienes intereses guardados aún.",
+    "notInterested": "No me interesa",
+    "details": "Ver detalles",
+    "filters": {
+      "search": "Buscar por título...",
+      "company": "Empresa...",
+      "tags": {
+        "Pasantía": "Pasantía",
+        "Empleo": "Empleo",
+        "TFG": "TFG",
+        "Remoto": "Remoto",
+        "Presencial": "Presencial"
+      }
+    }
   }
 }

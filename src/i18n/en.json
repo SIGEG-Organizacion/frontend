@@ -155,5 +155,24 @@
       "filterDateTo": "To Date",
       "applyFilters": "Apply Filters"
     }
+  },
+  "interests": {
+    "title": "My Interests",
+    "loading": "Loading interests...",
+    "error": "Error loading interests.",
+    "empty": "You have no saved interests yet.",
+    "notInterested": "Not interested",
+    "details": "View details",
+    "filters": {
+      "search": "Search by title...",
+      "company": "Company...",
+      "tags": {
+        "Pasantía": "Internship",
+        "Empleo": "Job",
+        "TFG": "Thesis",
+        "Remoto": "Remote",
+        "Presencial": "On-site"
+      }
+    }
   }
 }

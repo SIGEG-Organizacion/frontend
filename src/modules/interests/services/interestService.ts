@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Interest } from "../../../types/interest";
+import type { Interest } from "../types/interest";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -14,8 +14,11 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-const getInterests = async (): Promise<Interest[]> => {
-  const { data } = await api.get<Interest[]>("/");
+// Permite pasar query params para populate
+const getInterests = async (
+  params?: Record<string, unknown>
+): Promise<Interest[]> => {
+  const { data } = await api.get<Interest[]>("/", { params });
   return data;
 };
 

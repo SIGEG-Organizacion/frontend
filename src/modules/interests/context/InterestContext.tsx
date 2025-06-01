@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import interestsService from "../services/interestService";
-import type { Interest } from "../../../types/interest";
+import type { Interest } from "../types/interest";
 
 interface InterestsContextValue {
   interests: Interest[];
@@ -27,10 +27,11 @@ export const InterestsProvider = ({
   const refresh = async () => {
     try {
       setLoading(true);
-      const data = await interestsService.getInterests();
+      // Solicita los intereses con populate=true
+      const data = await interestsService.getInterests({ populate: true });
       setInterests(data);
-    } catch (err: any) {
-      setError(err.message || "Error al cargar intereses");
+    } catch (err) {
+      setError((err as Error).message || "Error al cargar intereses");
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,9 @@ export const InterestsProvider = ({
 
   const removeInterest = async (interestId: string) => {
     await interestsService.deleteInterest(interestId);
-    setInterests((prev) => prev.filter((i) => i._id !== interestId));
+    setInterests((prev) =>
+      prev.filter((i) => i.id !== interestId && i._id !== interestId)
+    );
   };
 
   useEffect(() => {

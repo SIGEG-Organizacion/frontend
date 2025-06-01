@@ -1,8 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 interface Props {
   title: string;
   company: string;
   createdAt: string;
-  modality: "onsite" | "remote" | "hybrid";
   tags: string[];
   description: string[];
   image?: string;
@@ -12,11 +13,12 @@ export default function InterestCard({
   title,
   company,
   createdAt,
-  modality,
   tags,
   description,
   image,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-gray-100 rounded-lg p-6 shadow-md relative flex flex-col gap-3">
       {/* Empresa + logo */}
@@ -63,10 +65,10 @@ export default function InterestCard({
       {/* Botones */}
       <div className="mt-4 flex justify-between items-center">
         <button className="text-[#FF5252] border border-[#FF5252] text-xs px-3 py-1 rounded hover:bg-red-50 transition">
-          No me interesa
+          {t("interests.notInterested", "No me interesa")}
         </button>
         <button className="bg-gray-600 text-white text-xs px-3 py-1 rounded hover:bg-gray-700 transition">
-          Ver detalles
+          {t("interests.details", "Ver detalles")}
         </button>
       </div>
     </div>
