@@ -61,7 +61,9 @@
     "login": "Sign In",
     "register": "Register",
     "logout": "Log Out",
-    "calendar": "Calendar"
+    "calendar": "Calendar",
+    "publications": "Publications",
+    "myInterests": "My Interests"
   },
   "home": {
     "welcome": "Welcome, {{name}}!",

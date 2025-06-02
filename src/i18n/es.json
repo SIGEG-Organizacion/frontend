@@ -61,7 +61,9 @@
     "login": "Iniciar Sesión",
     "register": "Registrarse",
     "logout": "Cerrar Sesión",
-    "calendar": "Agenda"
+    "calendar": "Agenda",
+    "publications": "Publicaciones",
+    "myInterests": "Mis Intereses"
   },
   "home": {
     "welcome": "¡Bienvenido, {{name}}!",

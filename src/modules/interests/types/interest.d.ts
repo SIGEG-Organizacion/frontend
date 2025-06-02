@@ -14,4 +14,5 @@ export interface Interest {
   userId: string;
   opportunityId: string | Opportunity;
   createdAt: string;
+  modality: "onsite" | "remote" | "hybrid";
 }

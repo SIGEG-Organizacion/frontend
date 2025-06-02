@@ -12,7 +12,7 @@ interface Filters {
 
 export default function InterestsPage() {
   const { t } = useTranslation();
-  const { interests, loading, error } = useInterests();
+  const { interests = [], loading, error } = useInterests();
   const [filters, setFilters] = useState<Filters>({
     tags: [],
     company: "",
@@ -22,9 +22,15 @@ export default function InterestsPage() {
   // Filtro de intereses
   // Ordena por fecha descendente
   const filteredInterests = useMemo(() => {
+    if (!Array.isArray(interests)) return [];
+
     return interests
       .filter((item) => {
-        if (typeof item.opportunityId !== "object" || !item.opportunityId)
+        if (
+          !item ||
+          typeof item.opportunityId !== "object" ||
+          !item.opportunityId
+        )
           return false;
         const {
           title = "",
@@ -51,17 +57,19 @@ export default function InterestsPage() {
 
   // Renderizado de tarjetas
   const renderInterestCard = (interest: (typeof interests)[number]) => {
-    if (typeof interest.opportunityId !== "object" || !interest.opportunityId)
+    if (
+      !interest ||
+      typeof interest.opportunityId !== "object" ||
+      !interest.opportunityId
+    )
       return null;
-    const { title, company, tags, modality, description, image } =
-      interest.opportunityId;
+    const { title, company, tags, description, image } = interest.opportunityId;
     return (
       <InterestCard
         key={interest.id}
         title={title}
         company={company}
         createdAt={interest.createdAt}
-        modality={modality}
         tags={tags}
         description={description}
         image={image}
@@ -70,13 +78,25 @@ export default function InterestsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white px-6 py-10">
-      <h1 className="text-4xl font-semibold text-center text-blue-700 drop-shadow-md mb-6">
+    <div className="container mx-auto p-6 space-y-8 bg-gray-100 min-h-screen">
+      <h1 className="text-5xl font-bold text-center text-blue-600 drop-shadow-lg">
         {t("interests.title", "Mis intereses")}
       </h1>
-      <div className="max-w-4xl mx-auto">
+
+      {/* Filters Section */}
+      <div className="bg-white shadow rounded-lg p-4 flex flex-wrap items-center justify-between gap-4">
         <InterestFilters onFiltersChange={setFilters} />
+        <input
+          type="text"
+          placeholder={t(
+            "interests.searchPlaceholder",
+            "Buscar flyer por nombre..."
+          )}
+          className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
+        />
       </div>
+
+      {/* Interests Cards */}
       {loading ? (
         <p className="text-center text-gray-500 mt-10">
           {t("interests.loading", "Cargando intereses...")}
@@ -90,7 +110,7 @@ export default function InterestsPage() {
           {t("interests.empty", "No tienes intereses guardados aún.")}
         </p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredInterests.map(renderInterestCard)}
         </div>
       )}

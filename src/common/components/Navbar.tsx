@@ -1,80 +1,91 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../modules/auth/hooks/useAuth'
-import { useTranslation } from 'react-i18next'
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../modules/auth/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 const Navbar: React.FC = () => {
-  const { user, logout } = useAuth()
-  const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
-    logout()
-    navigate('/login', { replace: true })
-  }
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="text-xl font-bold flex items-center">
-            <p>SI</p><p className='text-blue-500'>GEV</p>
+            <p>SI</p>
+            <p className="text-blue-500">GEV</p>
           </Link>
 
           <div className="flex space-x-4">
             <Link to="/" className="hover:underline">
-              {t('navbar.home')}
+              {t("navbar.home")}
             </Link>
 
             {user ? (
               <>
                 {/* Opciones según rol */}
-                {(user.role === 'adminTFG' || user.role === 'adminLink') && (
+                {(user.role === "adminTFG" || user.role === "adminLink") && (
                   <>
                     <Link to="/admin/users" className="hover:underline">
-                      {t('navbar.users')}
+                      {t("navbar.users")}
                     </Link>
                     <Link to="/calendar" className="hover:underline">
-                      {t('navbar.calendar')}
+                      {t("navbar.calendar")}
                     </Link>
                     <Link to="/profile" className="hover:underline">
-                      {t('navbar.profile')}
+                      {t("navbar.profile")}
                     </Link>
                   </>
                 )}
-
-                {user.role === 'company' && (
+                {user.role === "company" && (
                   <>
                     <Link to="/dashboard" className="hover:underline">
-                      {t('navbar.dashboard')}
+                      {t("navbar.dashboard")}
                     </Link>
 
                     <Link to="/profile" className="hover:underline">
-                      {t('navbar.profile')}
+                      {t("navbar.profile")}
                     </Link>
                   </>
                 )}
-
-                {user.role === 'student' && (
+                {user.role === "student" && (
                   <Link to="/profile" className="hover:underline">
-                    {t('navbar.profile')}
+                    {t("navbar.profile")}
                   </Link>
+                )}{" "}
+                {user.role === "student" && (
+                  <div className="flex-1 flex items-center relative">
+                    <Link
+                      to="/dashboard"
+                      className="ml-8 text-blue-500 hover:underline text-sm"
+                    >
+                      {t("navbar.publications", "Publicaciones")}
+                    </Link>
+                    <Link
+                      to="/interests"
+                      className="ml-6 text-blue-500 hover:underline text-sm"
+                    >
+                      {t("navbar.myInterests", "Mis Intereses")}
+                    </Link>
+                  </div>
                 )}
-
-                <button
-                  onClick={handleLogout}
-                  className="hover:underline"
-                >
-                  {t('navbar.logout')}
+                <button onClick={handleLogout} className="hover:underline">
+                  {t("navbar.logout")}
                 </button>
               </>
             ) : (
               <>
                 <Link to="/login" className="hover:underline">
-                  {t('navbar.login')}
+                  {t("navbar.login")}
                 </Link>
                 <Link to="/register" className="hover:underline">
-                  {t('navbar.register')}
+                  {t("navbar.register")}
                 </Link>
               </>
             )}
@@ -82,7 +93,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

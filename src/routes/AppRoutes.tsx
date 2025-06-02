@@ -19,6 +19,7 @@ import CalendarViewPage from "../modules/calendar/pages/CalendarViewPage";
 import CalendarRequestsPage from "../modules/calendar/pages/CalendarRequestsPage";
 
 import InterestsPage from "../modules/interests/pages/InterestPage";
+import { InterestsProvider } from "../modules/interests/context/InterestContext";
 import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage";
 
 const AppRoutes: React.FC = () => {
@@ -40,7 +41,14 @@ const AppRoutes: React.FC = () => {
           <Route path="/register/company" element={<RegisterCompanyPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/interests" element={<InterestsPage />} />
+          <Route
+            path="/interests"
+            element={
+              <InterestsProvider>
+                <InterestsPage />
+              </InterestsProvider>
+            }
+          />
           <Route path="/not-found" element={<NotFoundPage />} />
 
           {/* Company routes */}
