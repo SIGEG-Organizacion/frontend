@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
                 {user.role === "student" && (
                   <div className="flex-1 flex items-center relative">
                     <Link
-                      to="/dashboard"
+                      to="/opportunities"
                       className="ml-8 text-blue-500 hover:underline text-sm"
                     >
                       {t("navbar.publications", "Publicaciones")}

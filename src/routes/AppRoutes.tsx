@@ -21,6 +21,8 @@ import CalendarRequestsPage from "../modules/calendar/pages/CalendarRequestsPage
 import InterestsPage from "../modules/interests/pages/InterestPage";
 import { InterestsProvider } from "../modules/interests/context/InterestContext";
 import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage";
+import OpportunitiesPage from "../modules/opportunities/pages/OpportunitiesPage";
+import OpportunityDetailPage from "../modules/opportunities/pages/OpportunityDetailPage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -50,6 +52,11 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route path="/not-found" element={<NotFoundPage />} />
+          <Route path="/opportunities" element={<OpportunitiesPage />} />
+          <Route
+            path="/opportunities/:id"
+            element={<OpportunityDetailPage />}
+          />
 
           {/* Company routes */}
           {user?.role === "company" && (
