@@ -71,7 +71,8 @@
     "intro": {
       "student": "Encuentra aquí oportunidades de prácticas y recursos académicos.",
       "company": "Administra tu información de empresa y oferta de servicios.",
-      "admin": "Gestiona usuarios, roles y la configuración del sistema.",
+      "adminTFG": "Gestiona usuarios, roles y la configuración del sistema.",
+      "adminLink": "Gestiona usuarios, roles y la configuración del sistema.",
       "guest": "Por favor inicia sesión o regístrate para continuar."
     }
   },
