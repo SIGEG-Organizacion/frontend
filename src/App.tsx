@@ -1,4 +1,4 @@
-// src/modules/home/pages/HomePage.tsx
+// src/App.tsx
 import React from 'react'
 import { useAuth } from './modules/auth/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
