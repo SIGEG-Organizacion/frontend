@@ -96,7 +96,7 @@
     "roleNames": {
       "student": "Student",
       "company": "Company",
-      "adminTGF": "TFG Administrator",
+      "adminTFG": "TFG Administrator",
       "adminLink": "Linkage Administrator"
     }
   },
@@ -117,7 +117,7 @@
     "role": {
       "student": "Student",
       "company": "Company",
-      "adminTGF": "TFG Administrator",
+      "adminTFG": "TFG Administrator",
       "adminLink": "Linkage Administrator"
     },
     "actions": {
