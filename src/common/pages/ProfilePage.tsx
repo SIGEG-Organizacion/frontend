@@ -1,4 +1,4 @@
-// src/modules/user/pages/ProfilePage.tsx
+// src/common/pages/ProfilePage.tsx
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../../modules/auth/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
