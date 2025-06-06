@@ -95,7 +95,7 @@
     "roleNames": {
       "student": "Estudiante",
       "company": "Empresa",
-      "adminTGF": "Administrador TFG",
+      "adminTFG": "Administrador TFG",
       "adminLink": "Administrador Vinculación"
     }
   },
@@ -116,7 +116,7 @@
     "role": {
       "student": "Estudiante",
       "company": "Empresa",
-      "adminTGF": "Administrador TFG",
+      "adminTFG": "Administrador TFG",
       "adminLink": "Administrador Vinculación"
     },
     "actions": {

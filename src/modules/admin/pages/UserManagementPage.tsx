@@ -71,7 +71,7 @@ const UserManagementPage: React.FC = () => {
           <option value="">{t('userMgmt.filterAll')}</option>
           <option value="student">{t('userMgmt.role.student')}</option>
           <option value="company">{t('userMgmt.role.company')}</option>
-          <option value="adminTGF">{t('userMgmt.role.adminTGF')}</option>
+          <option value="adminTFG">{t('userMgmt.role.adminTFG')}</option>
           <option value="adminLink">{t('userMgmt.role.adminLink')}</option>
         </select>
       </div>
