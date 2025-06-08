@@ -9,19 +9,21 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="py-12 px-4 max-w-3xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6 text-center">
-        {t('home.welcome', { name: user?.name || t('home.guest') })}
-      </h1>
+      <div className="bg-white shadow rounded-lg p-8 space-y-4">
+        <h1 className="text-4xl font-bold mb-6 text-center">
+          {t('home.welcome', { name: user?.name || t('home.guest') })}
+        </h1>
 
-      {user ? (
-        <p className="text-lg text-center">
-          {t(`home.intro.${user.role}`)}
-        </p>
-      ) : (
-        <p className="text-lg text-center">
-          {t('home.intro.guest')}
-        </p>
-      )}
+        {user ? (
+          <p className="text-lg text-center">
+            {t(`home.intro.${user.role}`)}
+          </p>
+        ) : (
+          <p className="text-lg text-center">
+            {t('home.intro.guest')}
+          </p>
+        )}
+      </div>
     </div>
   )
 }

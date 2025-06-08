@@ -55,25 +55,19 @@ const Navbar: React.FC = () => {
                   </>
                 )}
                 {user.role === "student" && (
-                  <Link to="/profile" className="hover:underline">
-                    {t("navbar.profile")}
-                  </Link>
-                )}{" "}
-                {user.role === "student" && (
-                  <div className="flex-1 flex items-center relative">
-                    <Link
-                      to="/opportunities"
-                      className="ml-8 text-blue-500 hover:underline text-sm"
-                    >
-                      {t("navbar.publications", "Publicaciones")}
+                  <>
+                    <Link to="/profile" className="hover:underline">
+                      {t("navbar.profile")}
                     </Link>
-                    <Link
-                      to="/interests"
-                      className="ml-6 text-blue-500 hover:underline text-sm"
-                    >
-                      {t("navbar.myInterests", "Mis Intereses")}
+
+                    <Link to="/opportunities" className="hover:underline">
+                      {t("navbar.publications")}
                     </Link>
-                  </div>
+
+                    <Link to="/interests" className="hover:underline">
+                      {t("navbar.myInterests")}
+                    </Link>
+                  </>
                 )}
                 <button onClick={handleLogout} className="hover:underline">
                   {t("navbar.logout")}

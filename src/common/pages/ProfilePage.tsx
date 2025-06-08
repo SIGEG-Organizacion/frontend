@@ -52,7 +52,7 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-8 container mx-auto">
+    <div className="p-6 space-y-8 container max-w-4xl mx-auto">
       <div className="bg-white shadow rounded-lg p-6 space-y-4">
         <h1 className="text-2xl font-semibold">
           {t('profile.title')}
@@ -82,9 +82,6 @@ const ProfilePage: React.FC = () => {
                 user.phone_number || '—'
               )}
             </div>
-
-            <div className="font-medium">{t('profile.publications')}</div>
-            {/* <div className="text-right">{user.bookmarkedCount ?? 0}</div> */}
           </div>
 
           <div className="mt-4 flex justify-end space-x-2">
