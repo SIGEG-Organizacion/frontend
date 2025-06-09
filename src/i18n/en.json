@@ -148,15 +148,54 @@
   "company": {
     "dashboard": {
       "title": "Company Dashboard",
-      "totalViews": "Total Views",
-      "totalApplications": "Total Applications",
-      "totalPublications": "Total Publications",
-      "publications": "Publications",
-      "filterByName": "Filter by Publication Name",
-      "filterByNamePlaceholder": "Enter publication name…",
-      "filterDateFrom": "From Date",
-      "filterDateTo": "To Date",
-      "applyFilters": "Apply Filters"
+      "newOpportunity": "New Opportunity",
+      "cards": {
+        "views": "Total Views",
+        "applications": "Total Applications",
+        "publications": "Total Publications"
+      }
+    },
+    "form": {
+      "newTitle": "Create Opportunity",
+      "editTitle": "Edit Opportunity",
+      "description": "Description",
+      "requirements": "Requirements (comma-separated)",
+      "benefits": "Benefits (comma-separated)",
+      "csvPlaceholder": "e.g. JavaScript, React, Node.js",
+      "mode": "Mode",
+      "selectMode": "Select mode",
+      "modeRemote": "Remote",
+      "modeOnsite": "Onsite",
+      "modeHybrid": "Hybrid",
+      "email": "Contact Email",
+      "deadline": "Application Deadline",
+      "flyerUrl": "Flyer URL (optional)",
+      "flyerFormat": "Flyer Format (optional)",
+      "selectFormat": "Select format",
+      "forStudents": "For Students",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "list": {
+      "title": "Opportunities",
+      "filterDescriptionLabel": "Filter by description",
+      "filterDateFromLabel": "Filter by date from",
+      "filterDateToLabel": "Filter by date to",
+      "filterDescription": "Description",
+      "loading": "Loading opportunities…",
+      "colDescription": "Description",
+      "colDeadline": "Deadline",
+      "colMode": "Mode",
+      "colStatus": "Status",
+      "colActions": "Actions",
+      "status": {
+        "open": "Open",
+        "closed": "Closed"
+      },
+      "edit": "Edit",
+      "delete": "Delete",
+      "noData": "No opportunities found."
     }
   },
   "interests": {

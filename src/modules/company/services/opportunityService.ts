@@ -3,47 +3,57 @@
 import axios from 'axios'
 import type { Opportunity } from '../types/opportunity'
 
-// Apunta a donde montas opportunityRoutes en tu servidor:
+// Base URL de tu API (Vite)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+
 const api = axios.create({
-  baseURL: API_URL + '/opportunity',
+  baseURL: `${API_URL}/opportunities`,
 })
 
+// Interceptor para añadir el Bearer token en cada petición
+api.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token')
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  error => Promise.reject(error)
+)
+
 /**
- * Obtiene las oportunidades de la empresa actual.
+ * Obtiene las oportunidades de la empresa del usuario autenticado.
  * Si recibe companyName, la envía como query param `company_name`.
  */
-const listByCompany = async (
+export const listByCompany = async (
   companyName?: string
 ): Promise<Opportunity[]> => {
   const params: Record<string, string> = {}
   if (companyName) params.company_name = companyName
 
-  const { data } = await api.get<Opportunity[]>('/listByCompany', { params })
-  return data
+  const { data } = await api.get<{ opportunities: Opportunity[] }>('/listByCompany', { params })
+  return data.opportunities
 }
 
 /**
  * Obtiene todas las oportunidades (sin filtrar por empresa).
  */
-const list = async (): Promise<Opportunity[]> => {
+export const list = async (): Promise<Opportunity[]> => {
   const { data } = await api.get<Opportunity[]>('/list')
   return data
 }
 
 /**
  * Filtra oportunidades según criterios pasados como query params.
- * Las claves deben coincidir con lo que espera tu controlador (e.g. title, dateFrom, dateTo).
  */
-const filterOpportunities = async (filters: {
-  title?: string
-  dateFrom?: string
-  dateTo?: string
+export const filterOpportunities = async (filters: {
+  description?: string
+  deadline?: string
 }): Promise<Opportunity[]> => {
   const params: Record<string, string> = {}
-  if (filters.title) params.title = filters.title
-  if (filters.dateFrom) params.dateFrom = filters.dateFrom
-  if (filters.dateTo) params.dateTo = filters.dateTo
+  if (filters.description) params.description = filters.description
+  if (filters.deadline) params.deadline = filters.deadline
 
   const { data } = await api.get<Opportunity[]>('/filter', { params })
   return data
@@ -52,7 +62,7 @@ const filterOpportunities = async (filters: {
 /**
  * Obtiene una oportunidad por su UUID.
  */
-const getByUuid = async (uuid: string): Promise<Opportunity> => {
+export const getByUuid = async (uuid: string): Promise<Opportunity> => {
   const { data } = await api.get<Opportunity>(`/${uuid}`)
   return data
 }
@@ -60,8 +70,8 @@ const getByUuid = async (uuid: string): Promise<Opportunity> => {
 /**
  * Crea una nueva oportunidad.
  */
-const createOpportunity = async (
-  payload: Omit<Opportunity, '_id' | 'createdAt'>
+export const createOpportunity = async (
+  payload: Omit<Opportunity, '_id' | 'createdAt' | 'uuid'> 
 ): Promise<Opportunity> => {
   const { data } = await api.post<Opportunity>('/create', payload)
   return data
@@ -70,7 +80,7 @@ const createOpportunity = async (
 /**
  * Actualiza una oportunidad existente.
  */
-const updateOpportunity = async (
+export const updateOpportunity = async (
   uuid: string,
   payload: Partial<Opportunity>
 ): Promise<Opportunity> => {
@@ -81,16 +91,6 @@ const updateOpportunity = async (
 /**
  * Elimina una oportunidad por UUID.
  */
-const deleteOpportunity = async (uuid: string): Promise<void> => {
+export const deleteOpportunity = async (uuid: string): Promise<void> => {
   await api.delete(`/delete/${uuid}`)
-}
-
-export default {
-  listByCompany,
-  list,
-  filterOpportunities,
-  getByUuid,
-  createOpportunity,
-  updateOpportunity,
-  deleteOpportunity,
 }

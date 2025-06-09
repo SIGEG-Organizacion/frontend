@@ -1,182 +1,164 @@
+// src/modules/company/components/CompanyOpportunityForm.tsx
 import React, { useState } from 'react'
-import { t } from 'i18next'
-import opportunityService from '../services/opportunityService'
 import type { Opportunity } from '../types/opportunity'
+import { useTranslation } from 'react-i18next'
 
-interface CompanyOpportunityFormProps {
-  onClose: () => void
-  onCreated?: (opportunity: Opportunity) => void
+interface Props {
+  /** Si estamos editando, initialData viene con la oportunidad existente */
+  initialData?: Opportunity
+  /** callback que crea o actualiza la oportunidad */
+  onSave: (data: Omit<Opportunity, '_id' | 'createdAt' | 'uuid'> & { uuid?: string }) => Promise<void>
+  onCancel: () => void
+  loading: boolean
 }
 
-const CompanyOpportunityForm: React.FC<CompanyOpportunityFormProps> = ({ onClose, onCreated }) => {
-  const [description, setDescription] = useState('')
-  const [deadline, setDeadline] = useState('')
-  const [requirementsStr, setRequirementsStr] = useState('') // comma-separated
-  const [benefitsStr, setBenefitsStr] = useState('') // comma-separated
-  const [mode, setMode] = useState('')
-  const [contact, setContact] = useState('')
-  const [status, setStatus] = useState('pending-approval')
-  const [flyerUrl, setFlyerUrl] = useState('')
-  const [forStudents, setForStudents] = useState(false)
+const CompanyOpportunityForm: React.FC<Props> = ({
+  initialData,
+  onSave,
+  onCancel,
+  loading,
+}) => {
+  const { t } = useTranslation()
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [description, setDescription] = useState(initialData?.description ?? '')
+  const [requirements, setRequirements] = useState(
+    initialData?.requirements.join(', ') ?? ''
+  )
+  const [benefits, setBenefits] = useState(
+    initialData?.benefits.join(', ') ?? ''
+  )
+  const [mode, setMode] = useState(initialData?.mode ?? '')
+  const [email, setEmail] = useState(initialData?.email ?? '')
+  const [deadline, setDeadline] = useState(
+    initialData?.deadline.slice(0, 10) ?? ''
+  )
+  const [flyerUrl, setFlyerUrl] = useState(initialData?.flyerUrl ?? '')
+  const [flyerFormat, setFlyerFormat] = useState<'pdf' | 'jpg' | ''>(
+    initialData?.format ?? ''
+  )
+  const [forStudents, setForStudents] = useState(initialData?.forStudents ?? false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setError(null)
-
-    // convertir strings a arrays
-    const requirements = requirementsStr
-      .split(',')
-      .map((s) => s.trim())
-      .filter((s) => s)
-    const benefits = benefitsStr
-      .split(',')
-      .map((s) => s.trim())
-      .filter((s) => s)
-
-    try {
-      const payload = {
-        description,
-        deadline,
-        requirements,
-        benefits,
-        mode,
-        contact,
-        status,
-        flyerUrl,
-        forStudents,
-      }
-      const newOp = await opportunityService.createOpportunity(payload)
-      onCreated && onCreated(newOp)
-      onClose()
-    } catch (err: any) {
-      console.error(err)
-      setError(err.message || t('company.form.error'))
-    } finally {
-      setLoading(false)
-    }
+    await onSave({
+      ...(initialData ? { uuid: initialData.uuid } : {}),
+      companyId: initialData?.companyId ?? '',
+      description,
+      requirements: requirements
+        .split(',')
+        .map(r => r.trim())
+        .filter(r => r),
+      benefits: benefits
+        .split(',')
+        .map(b => b.trim())
+        .filter(b => b),
+      mode,
+      email,
+      deadline,
+      flyerUrl,
+      format: flyerFormat || undefined,
+      forStudents,
+      status: initialData?.status ?? 'open',
+    })
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <p className="text-red-600 text-sm">{error}</p>
-      )}
-
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-          {t('company.form.description')}
-        </label>
+        <label className="block mb-1 font-medium">{t('company.form.description')}</label>
         <textarea
-          id="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value)}
           required
-          className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          rows={4}
         />
       </div>
 
       <div>
-        <label htmlFor="deadline" className="block text-sm font-medium text-gray-700">
-          {t('company.form.deadline')}
-        </label>
+        <label className="block mb-1 font-medium">{t('company.form.requirements')}</label>
         <input
-          id="deadline"
-          type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          required
-          className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="requirements" className="block text-sm font-medium text-gray-700">
-          {t('company.form.requirements')} ({t('company.form.commaSeparated')})
-        </label>
-        <input
-          id="requirements"
           type="text"
-          value={requirementsStr}
-          onChange={(e) => setRequirementsStr(e.target.value)}
-          placeholder={t('company.form.requirementsPlaceholder')}
-          className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+          value={requirements}
+          onChange={e => setRequirements(e.target.value)}
+          placeholder={t('company.form.csvPlaceholder')}
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
       <div>
-        <label htmlFor="benefits" className="block text-sm font-medium text-gray-700">
-          {t('company.form.benefits')} ({t('company.form.commaSeparated')})
-        </label>
+        <label className="block mb-1 font-medium">{t('company.form.benefits')}</label>
         <input
-          id="benefits"
           type="text"
-          value={benefitsStr}
-          onChange={(e) => setBenefitsStr(e.target.value)}
-          placeholder={t('company.form.benefitsPlaceholder')}
-          className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+          value={benefits}
+          onChange={e => setBenefits(e.target.value)}
+          placeholder={t('company.form.csvPlaceholder')}
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="mode" className="block text-sm font-medium text-gray-700">
-            {t('company.form.mode')}
-          </label>
-          <input
-            id="mode"
-            type="text"
-            value={mode}
-            onChange={(e) => setMode(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label htmlFor="status" className="block text-sm font-medium text-gray-700">
-            {t('company.form.status')}
-          </label>
+          <label className="block mb-1 font-medium">{t('company.form.mode')}</label>
           <select
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+            value={mode}
+            onChange={e => setMode(e.target.value)}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           >
-            <option value="pending-approval">{t('company.status.pending')}</option>
-            <option value="approved">{t('company.status.approved')}</option>
-            <option value="closed">{t('company.status.closed')}</option>
+            <option value="">{t('company.form.selectMode')}</option>
+            <option value="remote">{t('company.form.modeRemote')}</option>
+            <option value="on-site">{t('company.form.modeOnsite')}</option>
+            <option value="hybrid">{t('company.form.modeHybrid')}</option>
           </select>
         </div>
+
+        <div>
+          <label className="block mb-1 font-medium">{t('company.form.email')}</label>
+          <input
+            type="text"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="contact" className="block text-sm font-medium text-gray-700">
-            {t('company.form.contact')}
-          </label>
+          <label className="block mb-1 font-medium">{t('company.form.deadline')}</label>
           <input
-            id="contact"
-            type="email"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+            type="date"
+            value={deadline}
+            onChange={e => setDeadline(e.target.value)}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           />
         </div>
+
         <div>
-          <label htmlFor="flyerUrl" className="block text-sm font-medium text-gray-700">
-            {t('company.form.flyerUrl')}
-          </label>
+          <label className="block mb-1 font-medium">{t('company.form.flyerUrl')}</label>
           <input
-            id="flyerUrl"
             type="url"
             value={flyerUrl}
-            onChange={(e) => setFlyerUrl(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+            onChange={e => setFlyerUrl(e.target.value)}
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           />
         </div>
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium">{t('company.form.flyerFormat')}</label>
+        <select
+          value={flyerFormat}
+          onChange={e => setFlyerFormat(e.target.value as 'pdf' | 'jpg' | '')}
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+        >
+          <option value="">{t('company.form.selectFormat')}</option>
+          <option value="PDF">PDF</option>
+          <option value="JPG">JPG</option>
+        </select>
       </div>
 
       <div className="flex items-center space-x-2">
@@ -184,26 +166,26 @@ const CompanyOpportunityForm: React.FC<CompanyOpportunityFormProps> = ({ onClose
           id="forStudents"
           type="checkbox"
           checked={forStudents}
-          onChange={(e) => setForStudents(e.target.checked)}
-          className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          onChange={e => setForStudents(e.target.checked)}
+          className="h-4 w-4"
         />
-        <label htmlFor="forStudents" className="text-sm text-gray-700">
+        <label htmlFor="forStudents" className="font-medium">
           {t('company.form.forStudents')}
         </label>
       </div>
 
-      <div className="flex justify-end space-x-2 pt-4">
+      <div className="flex justify-end space-x-2">
         <button
           type="button"
-          onClick={onClose}
-          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition"
+          onClick={onCancel}
+          className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
         >
           {t('company.form.cancel')}
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           {loading ? t('company.form.saving') : t('company.form.save')}
         </button>

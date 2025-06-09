@@ -7,10 +7,11 @@ export interface Opportunity {
   requirements: string[]
   benefits: string[]
   mode: string
-  contact: string
+  email: string
   status: string
   uuid: string
   createdAt: string
   flyerUrl?: string
+  format?: 'pdf' | 'jpg'
   forStudents: boolean
 }

@@ -146,15 +146,55 @@
   "company": {
     "dashboard": {
       "title": "Panel de Empresa",
-      "totalViews": "Total de Vistas",
-      "totalApplications": "Total de Solicitudes",
-      "totalPublications": "Total de Publicaciones",
-      "publications": "Publicaciones",
-      "filterByName": "Filtrar por Nombre de Publicación",
-      "filterByNamePlaceholder": "Ingresa el nombre de la publicación…",
-      "filterDateFrom": "Desde la Fecha",
-      "filterDateTo": "Fecha Hasta",
-      "applyFilters": "Aplicar Filtros"
+      "newOpportunity": "Nueva Oportunidad",
+      "cards": {
+        "views": "Total de Vistas",
+        "applications": "Total de Postulaciones",
+        "publications": "Total de Publicaciones"
+      }
+    },
+    "form": {
+      "newTitle": "Crear Oportunidad",
+      "editTitle": "Editar Oportunidad",
+      "description": "Descripción",
+      "requirements": "Requisitos (separados por comas)",
+      "benefits": "Beneficios (separados por comas)",
+      "csvPlaceholder": "p.ej. JavaScript, React, Node.js",
+      "mode": "Modalidad",
+      "selectMode": "Selecciona modalidad",
+      "modeRemote": "Remoto",
+      "modeOnsite": "Presencial",
+      "modeHybrid": "Mixto",
+      "email": "Correo Electrónico de Contacto",
+      "deadline": "Fecha límite",
+      "flyerUrl": "URL del volante (opcional)",
+      "flyerFormat": "Formato del volante (opcional)",
+      "selectFormat": "Selecciona formato",
+      "forStudents": "Para Estudiantes",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "saving": "Guardando..."
+    },
+    "list": {
+      "title": "Oportunidades",
+      "filterDescriptionLabel": "Filtrar por descripción",
+      "filterDateFromLabel": "Filtrar por fecha desde",
+      "filterDateToLabel": "Filtrar por fecha hasta",
+      "filterDescription": "Descripción",
+      "applyFilters": "Aplicar filtros",
+      "loading": "Cargando oportunidades…",
+      "colDescription": "Descripción",
+      "colDeadline": "Fecha límite",
+      "colMode": "Modalidad",
+      "colStatus": "Estado",
+      "colActions": "Acciones",
+      "status": {
+        "open": "Abierta",
+        "closed": "Cerrada"
+      },
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "noData": "No se encontraron oportunidades."
     }
   },
   "interests": {
