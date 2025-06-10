@@ -183,6 +183,8 @@
       "filterDateFromLabel": "Filter by date from",
       "filterDateToLabel": "Filter by date to",
       "filterDescription": "Description",
+      "filterStatusLabel": "Filter by status",
+      "filterStatus": "Status",
       "loading": "Loading opportunities…",
       "colDescription": "Description",
       "colDeadline": "Deadline",
@@ -191,7 +193,8 @@
       "colActions": "Actions",
       "status": {
         "open": "Open",
-        "closed": "Closed"
+        "closed": "Closed",
+        "pending-approval": "Pending Approval"
       },
       "edit": "Edit",
       "delete": "Delete",

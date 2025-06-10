@@ -181,6 +181,8 @@
       "filterDateFromLabel": "Filtrar por fecha desde",
       "filterDateToLabel": "Filtrar por fecha hasta",
       "filterDescription": "Descripción",
+      "filterStatusLabel": "Filtrar por estado",
+      "filterStatus": "Estado",
       "applyFilters": "Aplicar filtros",
       "loading": "Cargando oportunidades…",
       "colDescription": "Descripción",
@@ -190,7 +192,8 @@
       "colActions": "Acciones",
       "status": {
         "open": "Abierta",
-        "closed": "Cerrada"
+        "closed": "Cerrada",
+        "pending-approval": "Pendiente de aprobación"
       },
       "edit": "Editar",
       "delete": "Eliminar",

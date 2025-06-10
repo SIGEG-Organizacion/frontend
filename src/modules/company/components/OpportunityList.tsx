@@ -8,13 +8,15 @@ interface Props {
   loading: boolean
   error: string | null
 
-  // filtros controlados
   descriptionFilter: string
   dateFrom: string
   dateTo: string
+  statusFilter: string
+
   onDescriptionFilter: (val: string) => void
   onDateFrom: (val: string) => void
   onDateTo: (val: string) => void
+  onStatusFilter: (val: string) => void
 
   onEdit: (op: Opportunity) => void
   onDelete: (uuid: string) => void
@@ -27,9 +29,11 @@ const OpportunityList: React.FC<Props> = ({
   descriptionFilter,
   dateFrom,
   dateTo,
+  statusFilter,
   onDescriptionFilter,
   onDateFrom,
   onDateTo,
+  onStatusFilter,
   onEdit,
   onDelete,
 }) => {
@@ -37,13 +41,8 @@ const OpportunityList: React.FC<Props> = ({
 
   return (
     <div className="space-y-4">
-      {/* Opportunidades */}
-      <h2 className="text-2xl font-semibold mb-4">
-        {t('company.list.title')}
-      </h2>
-
-      {/* Filtros en cliente con labels */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+      {/* Filtros */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t('company.list.filterDescriptionLabel')}
@@ -56,6 +55,7 @@ const OpportunityList: React.FC<Props> = ({
             className="border rounded px-3 py-2 focus:outline-none focus:ring w-full"
           />
         </div>
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t('company.list.filterDateFromLabel')}
@@ -67,6 +67,7 @@ const OpportunityList: React.FC<Props> = ({
             className="border rounded px-3 py-2 focus:outline-none focus:ring w-full"
           />
         </div>
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t('company.list.filterDateToLabel')}
@@ -77,6 +78,24 @@ const OpportunityList: React.FC<Props> = ({
             onChange={e => onDateTo(e.target.value)}
             className="border rounded px-3 py-2 focus:outline-none focus:ring w-full"
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('company.list.filterStatusLabel')}
+          </label>
+          <select
+            value={statusFilter}
+            onChange={e => onStatusFilter(e.target.value)}
+            className="border rounded px-3 py-2 focus:outline-none focus:ring w-full"
+          >
+            <option value="">{t('company.list.filterStatus')}</option>
+            <option value="open">{t('company.list.status.open')}</option>
+            <option value="closed">{t('company.list.status.closed')}</option>
+            <option value="pending-approval">
+              {t('company.list.status.pending-approval')}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -93,6 +112,9 @@ const OpportunityList: React.FC<Props> = ({
                 {t('company.list.colDescription')}
               </th>
               <th className="px-4 py-2 text-left">
+                {t('company.list.colStatus')}
+              </th>
+              <th className="px-4 py-2 text-left">
                 {t('company.list.colDeadline')}
               </th>
               <th className="px-4 py-2 text-center">
@@ -107,6 +129,19 @@ const OpportunityList: React.FC<Props> = ({
                   {op.description.length > 100
                     ? `${op.description.substring(0, 100)}...`
                     : op.description}
+                </td>
+                <td className="px-4 py-2">
+                  <span
+                    className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
+                      op.status === 'open'
+                        ? 'bg-green-100 text-green-800'
+                        : op.status === 'closed'
+                        ? 'bg-red-100 text-red-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
+                    {t(`company.list.status.${op.status}`)}
+                  </span>
                 </td>
                 <td className="px-4 py-2">
                   {new Date(op.deadline).toLocaleDateString()}
