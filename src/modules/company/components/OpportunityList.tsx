@@ -20,6 +20,7 @@ interface Props {
 
   onEdit: (op: Opportunity) => void
   onDelete: (uuid: string) => void
+  onCancelPublication: (uuid: string) => void 
 }
 
 const OpportunityList: React.FC<Props> = ({
@@ -36,6 +37,7 @@ const OpportunityList: React.FC<Props> = ({
   onStatusFilter,
   onEdit,
   onDelete,
+  onCancelPublication,
 }) => {
   const { t } = useTranslation()
 
@@ -93,17 +95,15 @@ const OpportunityList: React.FC<Props> = ({
             <option value="open">{t('company.list.status.open')}</option>
             <option value="closed">{t('company.list.status.closed')}</option>
             <option value="pending-approval">
-              {t('company.list.status.pending-approval')}
+              {t('company.list.status.pendingApproval')}
             </option>
           </select>
         </div>
       </div>
 
-      {/* Mensajes */}
       {error && <div className="text-red-600">{error}</div>}
       {loading && <div>{t('company.list.loading')}</div>}
 
-      {/* Tabla */}
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-100 sticky top-0">
@@ -132,7 +132,7 @@ const OpportunityList: React.FC<Props> = ({
                 </td>
                 <td className="px-4 py-2">
                   <span
-                    className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
+                    className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
                       op.status === 'open'
                         ? 'bg-green-100 text-green-800'
                         : op.status === 'closed'
@@ -147,6 +147,14 @@ const OpportunityList: React.FC<Props> = ({
                   {new Date(op.deadline).toLocaleDateString()}
                 </td>
                 <td className="px-4 py-2 text-center space-x-2">
+                  {op.status === 'open' && (
+                    <button
+                      onClick={() => onCancelPublication(op.uuid)}
+                      className="text-yellow-600 border border-yellow-600 px-2 py-1 rounded hover:bg-yellow-50 transition"
+                    >
+                      {t('company.list.cancel')}
+                    </button>
+                  )}
                   <button
                     onClick={() => onEdit(op)}
                     className="text-green-600 border border-green-600 px-2 py-1 rounded hover:bg-green-50 transition"

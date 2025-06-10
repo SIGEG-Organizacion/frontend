@@ -197,6 +197,7 @@
       },
       "edit": "Editar",
       "delete": "Eliminar",
+      "cancel": "Cancelar",
       "noData": "No se encontraron oportunidades."
     }
   },

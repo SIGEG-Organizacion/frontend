@@ -16,26 +16,20 @@ const CompanyDashboardPage: React.FC = () => {
   const { t } = useTranslation()
   const companyName = user?.name
 
-  // Fetch oportunidades
   const { opportunities, loading, error, create, update, remove } =
     useOpportunities(companyName)
 
-  // Filtros en cliente
   const [descriptionFilter, setDescriptionFilter] = useState('')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
 
-  // Modal y edición
   const [editing, setEditing] = useState<Opportunity | null>(null)
   const [showForm, setShowForm] = useState(false)
 
-  // Métricas dinámicas
   const [metrics, setMetrics] = useState({ views: 0, publications: 0 })
   useEffect(() => {
-    // publications = número de oportunidades
     const pubs = opportunities.length
-    // views = total de intereses por oportunidad
     Promise.all(opportunities.map(op => getInterestsByOpportunity(op.uuid)))
       .then(arrays => {
         const totalViews = arrays.reduce((sum, arr) => sum + arr.length, 0)
@@ -44,7 +38,6 @@ const CompanyDashboardPage: React.FC = () => {
       .catch(() => setMetrics({ views: 0, publications: pubs }))
   }, [opportunities])
 
-  // Filtrado en memoria
   const filtered = useMemo(() => {
     return opportunities.filter(op => {
       const descOk = descriptionFilter
@@ -52,15 +45,12 @@ const CompanyDashboardPage: React.FC = () => {
         : true
       const d = new Date(op.deadline)
       const fromOk = dateFrom ? d >= new Date(dateFrom) : true
-      const toOk = dateTo   ? d <= new Date(dateTo)   : true
-      const statusOk = statusFilter
-        ? op.status === statusFilter
-        : true
+      const toOk   = dateTo   ? d <= new Date(dateTo)   : true
+      const statusOk = statusFilter ? op.status === statusFilter : true
       return descOk && fromOk && toOk && statusOk
     })
   }, [opportunities, descriptionFilter, dateFrom, dateTo, statusFilter])
 
-  // Handlers de creación / actualización
   const handleCreate = async (data: Omit<Opportunity, '_id' | 'createdAt' | 'uuid'>) => {
     await create(data)
     setShowForm(false)
@@ -73,17 +63,18 @@ const CompanyDashboardPage: React.FC = () => {
     setEditing(null)
     setShowForm(false)
   }
+  const handleCancelPub = async (uuid: string) => {
+    await update(uuid, { status: 'closed', forStudents: false })
+  }
 
   return (
     <>
-      {/* Backdrop blur */}
       {showForm && (
         <div
           className="fixed top-[4rem] inset-x-0 bottom-0 z-40"
           style={{ backdropFilter: 'blur(4px)' }}
         />
       )}
-      {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xl mx-4 relative">
@@ -107,7 +98,6 @@ const CompanyDashboardPage: React.FC = () => {
         </div>
       )}
 
-      {/* Contenido principal */}
       <div className={`p-6 container mx-auto transition-filter duration-300 ${showForm ? 'filter blur-sm' : ''}`}>
         <div className="bg-white shadow rounded-lg p-6 space-y-6">
           <div className="flex items-center justify-between">
@@ -139,6 +129,7 @@ const CompanyDashboardPage: React.FC = () => {
 
             onEdit={op => { setEditing(op); setShowForm(true) }}
             onDelete={remove}
+            onCancelPublication={handleCancelPub}
           />
         </div>
       </div>
