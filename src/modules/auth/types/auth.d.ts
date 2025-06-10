@@ -5,7 +5,7 @@ export interface User {
   id: string
   name: string
   email: string
-  role: 'student' | 'company' | AdminRole
+  role: 'student' | 'company' | AdminRole | 'graduate'
   phone_number: string
 
   // Optional properties based on user role

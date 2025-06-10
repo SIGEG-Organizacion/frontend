@@ -1,38 +1,47 @@
-import axios from "axios";
-import type { Interest } from "../types/interest";
+// src/modules/interests/services/interestService.ts
+import axios from 'axios'
+import type { Interest } from '../types/interest'
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// Crea un cliente axios apuntando al endpoint de intereses
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const api = axios.create({
+  baseURL: `${API_URL}/interests`,
+})
 
-const api = axios.create({ baseURL: API_URL + "/interests" });
-
-// Interceptor: añade token si existe
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+// Interceptor para adjuntar el token JWT en cada petición
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('token')
   if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`
   }
-  return config;
-});
+  return config
+})
 
-// Permite pasar query params para populate
-const getInterests = async (
-  params?: Record<string, unknown>
-): Promise<Interest[]> => {
-  const { data } = await api.get<Interest[]>("/", { params });
-  return data;
-};
+/**
+ * Lista todas las oportunidades en las que el usuario actual marcó interés.
+ * GET /api/interests/
+ * Respuesta: { interests: Interest[] }
+ */
+export const getMyInterests = async (): Promise<Interest[]> => {
+  const { data } = await api.get<Interest[]>('/')
+  return data
+}
 
-const createInterest = async (opportunityId: string): Promise<Interest> => {
-  const { data } = await api.post<Interest>("/", { opportunityId });
-  return data;
-};
+/**
+ * Marca interés en una oportunidad.
+ * POST /api/interests/mark
+ * Body: { uuid: string }
+ * Respuesta 201
+ */
+export const markInterest = async (uuid: string): Promise<void> => {
+  await api.post('/mark', { uuid })
+}
 
-const deleteInterest = async (interestId: string): Promise<void> => {
-  await api.delete(`/${interestId}`);
-};
-
-export default {
-  getInterests,
-  createInterest,
-  deleteInterest,
-};
+/**
+ * Quita interés de una oportunidad.
+ * DELETE /api/interests/unmark/:uuid
+ * Respuesta 200
+ */
+export const unmarkInterest = async (uuid: string): Promise<void> => {
+  await api.delete(`/unmark/${uuid}`)
+}

@@ -17,12 +17,10 @@ import CalendarSyncPage from "../modules/calendar/pages/CalendarSyncPage";
 import CalendarCallbackPage from "../modules/calendar/pages/CalendarCallbackPage";
 import CalendarViewPage from "../modules/calendar/pages/CalendarViewPage";
 import CalendarRequestsPage from "../modules/calendar/pages/CalendarRequestsPage";
-
-import InterestsPage from "../modules/interests/pages/InterestPage";
-import { InterestsProvider } from "../modules/interests/context/InterestContext";
 import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage";
 import OpportunitiesPage from "../modules/opportunities/pages/OpportunitiesPage";
 import OpportunityDetailPage from "../modules/opportunities/pages/OpportunityDetailPage";
+import MyInterestsPage from "../modules/interests/pages/MyInsterestsPage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -43,20 +41,18 @@ const AppRoutes: React.FC = () => {
           <Route path="/register/company" element={<RegisterCompanyPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route
-            path="/interests"
-            element={
-              <InterestsProvider>
-                <InterestsPage />
-              </InterestsProvider>
-            }
-          />
           <Route path="/not-found" element={<NotFoundPage />} />
-          <Route path="/opportunities" element={<OpportunitiesPage />} />
-          <Route
-            path="/opportunities/:id"
-            element={<OpportunityDetailPage />}
-          />
+
+          {user?.role === "student" || user?.role === "graduate" ? (
+            <>
+              <Route path="/opportunities" element={<OpportunitiesPage />} />
+              <Route
+                path="/opportunities/:uuid"
+                element={<OpportunityDetailPage />}
+              />
+              <Route path="/interests" element={<MyInterestsPage />} />
+            </>
+          ) : null}
 
           {/* Company routes */}
           {user?.role === "company" && (

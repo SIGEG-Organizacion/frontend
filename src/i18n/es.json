@@ -62,7 +62,7 @@
     "register": "Registrarse",
     "logout": "Cerrar Sesión",
     "calendar": "Agenda",
-    "publications": "Publicaciones",
+    "publications": "Oportunidades",
     "myInterests": "Mis Intereses"
   },
   "home": {
@@ -83,7 +83,7 @@
   "profile": {
     "title": "Mi Perfil",
     "noUser": "Ningún usuario autenticado.",
-    "name": "Nombre completo",
+    "name": "Nombre",
     "email": "Correo electrónico",
     "phone": "Teléfono",
     "publications": "Publicaciones",
@@ -209,6 +209,15 @@
     "notInterested": "No me interesa",
     "details": "Ver detalles",
     "filters": {
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Buscar descripción…",
+      "dateFromLabel": "Fecha límite desde",
+      "dateToLabel": "Fecha límite hasta",
+      "modeLabel": "Modalidad",
+      "modeAll": "Todas",
+      "modeRemote": "Remoto",
+      "modeOnSite": "Presencial",
+      "modeHybrid": "Mixto",
       "search": "Buscar por título...",
       "company": "Empresa...",
       "tags": {
@@ -217,6 +226,65 @@
         "TFG": "TFG",
         "Remoto": "Remoto",
         "Presencial": "Presencial"
+      }
+    },
+    "page": {
+      "title": "Mis Intereses",
+      "loading": "Cargando tus intereses…",
+      "noData": "No tienes intereses aún."
+    },
+    "card": {
+      "view": "Ver Detalles",
+      "remove": "Quitar Interés",
+      "removing": "Quitando…"
+    }
+  },
+  "opportunities": {
+    "nav": {
+      "title": "Oportunidades"
+    },
+    "filters": {
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Buscar descripción…",
+      "companyLabel": "Empresa",
+      "companyPlaceholder": "Buscar empresa…",
+      "dateFromLabel": "Fecha límite desde",
+      "dateToLabel": "Fecha límite hasta",
+      "forStudentsLabel": "Solo para estudiantes"
+    },
+    "cards": {
+      "viewDetails": "Ver detalles"
+    },
+    "page": {
+      "title": "Oportunidades",
+      "loading": "Cargando oportunidades…",
+      "noResults": "No hay oportunidades que coincidan."
+    },
+    "detail": {
+      "back": "Volver a Oportunidades",
+      "loading": "Cargando oportunidad…",
+      "error": "Error al cargar la oportunidad.",
+      "deadline": "Fecha límite",
+      "mode": "Modalidad",
+      "email": "Correo electrónico de contacto",
+      "forStudents": "Disponible para estudiantes",
+      "status": "Estado",
+      "requirements": "Requisitos",
+      "benefits": "Beneficios",
+      "flyer": "Volante",
+      "viewFlyer": "Ver volante",
+      "contact": "Contacto",
+      "yes": "Sí",
+      "no": "No",
+      "modeList": {
+        "remote": "Remoto",
+        "onsite": "Presencial",
+        "hybrid": "Híbrido"
+      },
+      "statusList": {
+        "open": "Abierta",
+        "closed": "Cerrada",
+        "pending-approval": "Pendiente de aprobación"
       }
     }
   }

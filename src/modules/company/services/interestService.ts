@@ -13,8 +13,12 @@ export interface Interest {
   userRole: 'student' | 'graduate'
 }
 
-const API = axios.create({ baseURL: '/api/interests' })
-API.interceptors.request.use(cfg => {
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const api = axios.create({
+  baseURL: `${API_URL}/interests`
+})
+
+api.interceptors.request.use(cfg => {
   const token = localStorage.getItem('token')
   if (token && cfg.headers) cfg.headers.Authorization = `Bearer ${token}`
   return cfg
@@ -26,7 +30,7 @@ API.interceptors.request.use(cfg => {
 export const getInterestsByOpportunity = async (
   uuid: string
 ): Promise<Interest[]> => {
-  const { data } = await API.get<{ interests: Interest[] }>(
+  const { data } = await api.get<{ interests: Interest[] }>(
     `/opportunity/${uuid}`
   )
   return data.interests

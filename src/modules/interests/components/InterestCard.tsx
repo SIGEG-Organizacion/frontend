@@ -1,76 +1,55 @@
-import { useTranslation } from "react-i18next";
+// src/modules/interests/components/InterestCard.tsx
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import type { Interest } from '../types/interest'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
-  title: string;
-  company: string;
-  createdAt: string;
-  tags: string[];
-  description: string[];
-  image?: string;
+  interest: Interest
+  onRemove: (uuid: string) => void
+  removing: boolean
 }
 
-export default function InterestCard({
-  title,
-  company,
-  createdAt,
-  tags,
-  description,
-  image,
-}: Props) {
-  const { t } = useTranslation();
+const InterestCard: React.FC<Props> = ({ interest, onRemove, removing }) => {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+
+  const handleView = () => {
+    navigate(`/opportunities/${interest.uuid}`)
+  }
 
   return (
-    <div className="bg-gray-100 rounded-lg p-6 shadow-md relative flex flex-col gap-3">
-      {/* Empresa + logo */}
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-2xl font-bold text-black">{company}</h3>
-          <p className="text-xs text-gray-500 mt-1">
-            Publicado el {new Date(createdAt).toLocaleDateString()}
-          </p>
-        </div>
-        {image ? (
-          <img
-            src={image}
-            alt={`${company} logo`}
-            className="w-16 h-16 object-contain"
-          />
-        ) : (
-          <div className="w-16 h-16 bg-gray-400 rounded-full" />
-        )}
+    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
+      <div onClick={handleView} className="cursor-pointer">
+        <h3 className="text-lg font-semibold mb-2">{interest.companyName}</h3>
+        <p className="text-gray-700 mb-4">
+          {interest.description.length > 50
+            ? `${interest.description.substring(0, 50)}…`
+            : interest.description}
+        </p>
       </div>
-
-      {/* Título de la publicación */}
-      <h4 className="text-lg font-medium text-gray-800 mt-2">{title}</h4>
-
-      {/* Descripción con checkmarks */}
-      <ul className="text-xs text-black list-disc ml-5 space-y-1">
-        {description.map((d, idx) => (
-          <li key={idx}>{d}</li>
-        ))}
-      </ul>
-
-      {/* Etiquetas */}
-      <div className="flex gap-2 mt-3 flex-wrap">
-        {tags.map((tag) => (
-          <span
-            key={tag}
-            className="bg-gray-300 text-gray-700 text-[10px] px-3 py-[2px] rounded-full"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Botones */}
-      <div className="mt-4 flex justify-between items-center">
-        <button className="text-[#FF5252] border border-[#FF5252] text-xs px-3 py-1 rounded hover:bg-red-50 transition">
-          {t("interests.notInterested", "No me interesa")}
-        </button>
-        <button className="bg-gray-600 text-white text-xs px-3 py-1 rounded hover:bg-gray-700 transition">
-          {t("interests.details", "Ver detalles")}
+      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+        <span>{new Date(interest.deadline).toLocaleDateString()}</span>
+        <button
+          onClick={handleView}
+          className="text-blue-600 hover:underline focus:outline-none"
+        >
+          {t('interests.card.view')}
         </button>
       </div>
+      <button
+        onClick={() => onRemove(interest.uuid)}
+        disabled={removing}
+        className={`mt-auto px-4 py-2 rounded transition ${
+          removing
+            ? 'bg-gray-400 text-white'
+            : 'bg-red-600 text-white hover:bg-red-700'
+        }`}
+      >
+        {removing ? t('interests.card.removing') : t('interests.card.remove')}
+      </button>
     </div>
-  );
+  )
 }
+
+export default InterestCard

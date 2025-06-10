@@ -62,7 +62,7 @@
     "register": "Register",
     "logout": "Log Out",
     "calendar": "Calendar",
-    "publications": "Publications",
+    "publications": "Opportunities",
     "myInterests": "My Interests"
   },
   "home": {
@@ -84,7 +84,7 @@
   "profile": {
     "title": "My Profile",
     "noUser": "No user logged in.",
-    "name": "Full Name",
+    "name": "Name",
     "email": "Email",
     "phone": "Phone",
     "publications": "Publications",
@@ -210,6 +210,15 @@
     "notInterested": "Not interested",
     "details": "View details",
     "filters": {
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Search description…",
+      "dateFromLabel": "Deadline from",
+      "dateToLabel": "Deadline to",
+      "modeLabel": "Mode",
+      "modeAll": "All modes",
+      "modeRemote": "Remote",
+      "modeOnSite": "On-site",
+      "modeHybrid": "Hybrid",
       "search": "Search by title...",
       "company": "Company...",
       "tags": {
@@ -218,6 +227,67 @@
         "TFG": "Thesis",
         "Remoto": "Remote",
         "Presencial": "On-site"
+      }
+    },
+    "page": {
+      "title": "My Interests",
+      "loading": "Loading your interests…",
+      "noData": "You have no interests yet."
+    },
+    "card": {
+      "view": "View Details",
+      "remove": "Remove Interest",
+      "removing": "Removing…"
+    }
+  },
+  "opportunities": {
+    "nav": {
+      "title": "Opportunities"
+    },
+    "filters": {
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Search description…",
+      "companyLabel": "Company",
+      "companyPlaceholder": "Search company…",
+      "dateFromLabel": "Deadline from",
+      "dateToLabel": "Deadline to",
+      "forStudentsLabel": "Open to students only"
+    },
+    "cards": {
+      "viewDetails": "View Details"
+    },
+    "page": {
+      "title": "Opportunities",
+      "loading": "Loading opportunities…",
+      "noResults": "No opportunities match your filters."
+    },
+    "detail": {
+      "back": "Back to Opportunities",
+      "loading": "Loading opportunity…",
+      "error": "Failed to load opportunity.",
+      "deadline": "Deadline",
+      "mode": "Mode",
+      "email": "Contact Email",
+      "forStudents": "Open to students",
+      "status": "Status",
+      "requirements": "Requirements",
+      "benefits": "Benefits",
+      "flyer": "Flyer",
+      "viewFlyer": "View Flyer",
+      "contact": "Contact",
+      "yes": "Yes",
+      "no": "No",
+      "markInterest": "Mark as Interested",
+      "unmarkInterest": "Unmark Interest",
+      "modeList": {
+        "remote": "Remote",
+        "onsite": "On-site",
+        "hybrid": "Hybrid"
+      },
+      "statusList": {
+        "open": "Open",
+        "closed": "Closed",
+        "pending-approval": "Pending Approval"
       }
     }
   }
