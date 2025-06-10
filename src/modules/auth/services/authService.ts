@@ -82,7 +82,10 @@ const getProfile = async (): Promise<User> => {
 }
 
 const updateProfile = async (data: Partial<User>): Promise<User> => {
-  const { data: updated } = await api.put<User>('/me', data)
+  const { data: updated } = await api.put<User>('/update', {
+    updateData:
+      data,
+  })
   return updated
 }
 
