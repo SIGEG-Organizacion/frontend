@@ -95,7 +95,7 @@ const OpportunityList: React.FC<Props> = ({
             <option value="open">{t('company.list.status.open')}</option>
             <option value="closed">{t('company.list.status.closed')}</option>
             <option value="pending-approval">
-              {t('company.list.status.pendingApproval')}
+              {t('company.list.status.pending-approval')}
             </option>
           </select>
         </div>
