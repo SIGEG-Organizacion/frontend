@@ -43,6 +43,11 @@ const OpportunityList: React.FC<Props> = ({
 
   return (
     <div className="space-y-4">
+
+      <h2 className="text-2xl font-semibold mb-4">
+        {t('company.list.title')}
+      </h2>
+
       {/* Filtros */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
         <div>
