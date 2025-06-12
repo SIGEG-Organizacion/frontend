@@ -287,5 +287,50 @@
         "pending-approval": "Pendiente de aprobación"
       }
     }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Panel de Administración",
+      "opportunitiesTitle": "Oportunidades",
+      "totalOpportunities": "Total de Oportunidades",
+      "pendingOpportunities": "Pendientes de Aprobación",
+      "usersByRole": "Usuarios por Rol",
+      "roles": {
+        "student": "Estudiantes",
+        "company": "Empresas",
+        "adminTGF": "Admin TFG",
+        "adminLink": "Admin Vinculación"
+      },
+      "loadingOpps": "Cargando oportunidades…",
+      "noOpps": "No hay oportunidades disponibles.",
+      "filters": {
+        "descriptionLabel": "Descripción",
+        "descriptionPlaceholder": "Filtrar por descripción…",
+        "companyLabel": "Empresa",
+        "companyPlaceholder": "Filtrar por empresa…",
+        "dateFromLabel": "Fecha límite desde",
+        "dateToLabel": "Fecha límite hasta",
+        "statusLabel": "Estado",
+        "statusAll": "Todos los estados"
+      },
+      "status": {
+        "open": "Abierta",
+        "pendingApproval": "Pendiente de Aprobación",
+        "closed": "Cerrada"
+      },
+      "table": {
+        "colDescription": "Descripción",
+        "colCompany": "Empresa",
+        "colDeadline": "Fecha límite",
+        "colMode": "Modalidad",
+        "colStatus": "Estado",
+        "colActions": "Acciones"
+      },
+      "actions": {
+        "view": "Ver",
+        "approve": "Aprobar",
+        "reject": "Rechazar"
+      }
+    }
   }
 }

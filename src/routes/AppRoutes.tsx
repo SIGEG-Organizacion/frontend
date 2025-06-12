@@ -21,6 +21,7 @@ import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage"
 import OpportunitiesPage from "../modules/opportunities/pages/OpportunitiesPage";
 import OpportunityDetailPage from "../modules/opportunities/pages/OpportunityDetailPage";
 import MyInterestsPage from "../modules/interests/pages/MyInsterestsPage";
+import AdminDashboardPage from "../modules/admin/dashboard/pages/AdminDashboardPage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -65,6 +66,12 @@ const AppRoutes: React.FC = () => {
           {user?.role?.startsWith("admin") && (
             <>
               <Route path="/admin/users" element={<UserManagementPage />} />
+
+              <Route path="/dashboard" element={<AdminDashboardPage />} />
+              <Route
+                path="/opportunities/:uuid"
+                element={<OpportunityDetailPage />}
+              />
 
               <Route path="/calendar" element={<CalendarViewPage />} />
               <Route path="/calendar/sync" element={<CalendarSyncPage />} />

@@ -35,6 +35,9 @@ const Navbar: React.FC = () => {
                     <Link to="/admin/users" className="hover:underline">
                       {t("navbar.users")}
                     </Link>
+                    <Link to="/dashboard" className="hover:underline">
+                      {t("navbar.dashboard")}
+                    </Link>
                     <Link to="/calendar" className="hover:underline">
                       {t("navbar.calendar")}
                     </Link>

@@ -290,5 +290,50 @@
         "pending-approval": "Pending Approval"
       }
     }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "opportunitiesTitle": "Opportunities",
+      "totalOpportunities": "Total Opportunities",
+      "pendingOpportunities": "Pending Approval",
+      "usersByRole": "Users by Role",
+      "roles": {
+        "student": "Students",
+        "company": "Companies",
+        "adminTGF": "TFG Admin",
+        "adminLink": "Linkage Admin"
+      },
+      "loadingOpps": "Loading opportunities…",
+      "noOpps": "No opportunities available.",
+      "filters": {
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Filter by description…",
+        "companyLabel": "Company",
+        "companyPlaceholder": "Filter by company…",
+        "dateFromLabel": "Deadline from",
+        "dateToLabel": "Deadline to",
+        "statusLabel": "Status",
+        "statusAll": "All statuses"
+      },
+      "status": {
+        "open": "Open",
+        "pendingApproval": "Pending Approval",
+        "closed": "Closed"
+      },
+      "table": {
+        "colDescription": "Description",
+        "colCompany": "Company",
+        "colDeadline": "Deadline",
+        "colMode": "Mode",
+        "colStatus": "Status",
+        "colActions": "Actions"
+      },
+      "actions": {
+        "view": "View",
+        "approve": "Approve",
+        "reject": "Reject"
+      }
+    }
   }
 }

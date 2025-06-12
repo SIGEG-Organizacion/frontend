@@ -3,7 +3,6 @@ import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useInterests } from '../hooks/useInterests'
 import InterestCard from '../components/InterestCard'
-import type { Interest } from '../types/interest'
 
 const MyInterestsPage: React.FC = () => {
   const { t } = useTranslation()
