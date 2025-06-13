@@ -21,6 +21,7 @@ interface Props {
   onEdit: (op: Opportunity) => void
   onDelete: (uuid: string) => void
   onCancelPublication: (uuid: string) => void 
+  onShowInterests?: (op: Opportunity) => void
 }
 
 const OpportunityList: React.FC<Props> = ({
@@ -38,6 +39,7 @@ const OpportunityList: React.FC<Props> = ({
   onEdit,
   onDelete,
   onCancelPublication,
+  onShowInterests,
 }) => {
   const { t } = useTranslation()
 
@@ -125,6 +127,7 @@ const OpportunityList: React.FC<Props> = ({
               <th className="px-4 py-2 text-center">
                 {t('company.list.colActions')}
               </th>
+              <th className="px-4 py-2 text-center">Intereses</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -171,6 +174,14 @@ const OpportunityList: React.FC<Props> = ({
                     className="text-red-600 border border-red-600 px-2 py-1 rounded hover:bg-red-50 transition"
                   >
                     {t('company.list.delete')}
+                  </button>
+                </td>
+                <td className="px-4 py-2 text-center">
+                  <button
+                    className="text-blue-600 border border-blue-600 px-2 py-1 rounded hover:bg-blue-50 transition"
+                    onClick={() => onShowInterests && onShowInterests(op)}
+                  >
+                    Ver intereses
                   </button>
                 </td>
               </tr>
