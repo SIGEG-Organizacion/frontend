@@ -21,7 +21,7 @@ const UserManagementPage: React.FC = () => {
     setLoading(true);
     try {
       const all = await getAllUsers();
-      setUsers(all);
+      setUsers(all || []);
     } catch (error) {
       console.error("Error fetching users:", error);
       setError("Error al cargar usuarios");
@@ -34,7 +34,7 @@ const UserManagementPage: React.FC = () => {
     fetchUsers();
   }, []);
 
-  const filtered = users.filter((u) => {
+  const filtered = (users || []).filter((u) => {
     const q = search.toLowerCase();
     if (roleFilter && u.role !== roleFilter) return false;
     return (
