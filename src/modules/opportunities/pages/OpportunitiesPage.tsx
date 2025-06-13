@@ -1,12 +1,14 @@
 // src/modules/opportunities/pages/OpportunitiesPage.tsx
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../auth/hooks/useAuth'
 import OpportunityFilters from '../components/OpportunityFilters'
 import OpportunityCard from '../components/OpportunityCard'
 import { useStudentOpportunities } from '../hooks/useStudentOpportunities'
 
 const OpportunitiesPage: React.FC = () => {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const { opportunities, loading, error } = useStudentOpportunities()
 
   const [filters, setFilters] = useState({
@@ -19,11 +21,25 @@ const OpportunitiesPage: React.FC = () => {
 
   const filtered = useMemo(() => {
     return opportunities.filter(op => {
+      // 1) Filtrado según el rol del usuario:
+      //   - "student" y "adminTGF" ➞ solo muestran forStudents === true
+      //   - "adminLink" y "graduate" ➞ solo muestran forStudents === false
+      const role = user?.role
+      if (role === 'student' || role === 'adminTFG') {
+        if (!op.forStudents) return false
+      } else if (role === 'adminLink' || role === 'graduate') {
+        if (op.forStudents) return false
+      }
+      // 2) Resto de filtros del formulario
       const descOk = filters.description
         ? op.description.toLowerCase().includes(filters.description.toLowerCase())
         : true
       const compOk = filters.companyName
-        ? op.companyId.userId.name
+        ? (
+            typeof op.companyId === 'object'
+              ? op.companyId.userId.name
+              : (op as any).companyName
+          )
             .toLowerCase()
             .includes(filters.companyName.toLowerCase())
         : true
@@ -31,9 +47,10 @@ const OpportunitiesPage: React.FC = () => {
       const fromOk = filters.dateFrom ? d >= new Date(filters.dateFrom) : true
       const toOk   = filters.dateTo   ? d <= new Date(filters.dateTo)   : true
       const studentsOk = filters.forStudents ? op.forStudents : true
+
       return descOk && compOk && fromOk && toOk && studentsOk
     })
-  }, [opportunities, filters])
+  }, [opportunities, filters, user?.role])
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">

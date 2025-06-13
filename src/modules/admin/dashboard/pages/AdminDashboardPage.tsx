@@ -9,12 +9,12 @@ import Reports from '../../components/Reports'
 import { useAdminDashboard } from '../hooks/useAdminDashboard'
 import type { Opportunity } from '../../../opportunities/types/opportunity'
 import { updateOpportunityStatus } from '../services/adminDashboardService'
+import { useAuth } from '../../../auth/hooks/useAuth'
 
 const AdminDashboardPage: React.FC = () => {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const {
-    totalOpportunities,
-    pendingOpportunities,
     usersByRole,
     opportunities,
     loading,
@@ -34,6 +34,8 @@ const AdminDashboardPage: React.FC = () => {
   // Filtrado en memoria
   const filtered = useMemo<Opportunity[]>(() => {
     return opportunities.filter(op => {
+      if (user?.role === 'adminTFG' && !op.forStudents) return false
+      if (user?.role === 'adminLink' && op.forStudents) return false
       const descOk = filters.description
         ? op.description.toLowerCase().includes(filters.description.toLowerCase())
         : true
@@ -70,8 +72,8 @@ const AdminDashboardPage: React.FC = () => {
           {error && <div className="text-red-600 mb-4">{error}</div>}
 
           <StatsCards
-            totalOpportunities={totalOpportunities}
-            pendingOpportunities={pendingOpportunities}
+            totalOpportunities={filtered.length}
+            pendingOpportunities={filtered.filter(op => op.status === 'pending-approval').length}
             usersByRole={usersByRole}
           />
 
