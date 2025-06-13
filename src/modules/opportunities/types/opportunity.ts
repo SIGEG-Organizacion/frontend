@@ -20,6 +20,6 @@ export interface Opportunity {
   requirements?: string[]
   benefits?: string[]
   flyerUrl?: string
-  flyerFormat?: 'pdf' | 'png'
+  flyerFormat?: 'png'
   createdAt: string
 }

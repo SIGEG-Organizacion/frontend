@@ -12,6 +12,6 @@ export interface Opportunity {
   uuid: string
   createdAt: string
   flyerUrl?: string
-  format?: 'pdf' | 'jpg'
+  format?: 'jpg'
   forStudents: boolean
 }

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import StatsCards from '../components/StatsCards'
 import AllOpportunitiesFilters from '../components/AllOpportunitiesFilters'
 import AllOpportunitiesTable from '../components/AllOpportunitiesTable'
+import Reports from '../../components/Reports'
 import { useAdminDashboard } from '../hooks/useAdminDashboard'
 import type { Opportunity } from '../../../opportunities/types/opportunity'
 import { updateOpportunityStatus } from '../services/adminDashboardService'
@@ -28,6 +29,7 @@ const AdminDashboardPage: React.FC = () => {
     dateTo: '',
     status: '',
   })
+  const [activeTab, setActiveTab] = useState<'opportunities' | 'reports'>('opportunities')
 
   // Filtrado en memoria
   const filtered = useMemo<Opportunity[]>(() => {
@@ -63,33 +65,62 @@ const AdminDashboardPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
       <div className="bg-white shadow rounded-lg p-6 space-y-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">{t('admin.dashboard.title')}</h1>
-        {error && <div className="text-red-600 mb-4">{error}</div>}
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold mb-6">{t('admin.dashboard.title')}</h1>
+          {error && <div className="text-red-600 mb-4">{error}</div>}
 
-        <StatsCards
-          totalOpportunities={totalOpportunities}
-          pendingOpportunities={pendingOpportunities}
-          usersByRole={usersByRole}
-        />
+          <StatsCards
+            totalOpportunities={totalOpportunities}
+            pendingOpportunities={pendingOpportunities}
+            usersByRole={usersByRole}
+          />
 
-        <h2 className="text-2xl font-semibold mb-4">
-            {t('admin.dashboard.opportunitiesTitle')}
-        </h2>
+          <div className="border-b border-gray-200 mb-6">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('opportunities')}
+                className={`
+                  py-4 px-1 border-b-2 font-medium text-sm
+                  ${activeTab === 'opportunities'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+                `}
+              >
+                {t('admin.dashboard.opportunitiesTitle')}
+              </button>
+              <button
+                onClick={() => setActiveTab('reports')}
+                className={`
+                  py-4 px-1 border-b-2 font-medium text-sm
+                  ${activeTab === 'reports'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+                `}
+              >
+                {t('admin.dashboard.reportsTitle')}
+              </button>
+            </nav>
+          </div>
 
-        <AllOpportunitiesFilters
-          filters={filters}
-          onChange={changes => setFilters(prev => ({ ...prev, ...changes }))}
-        />
+          {activeTab === 'opportunities' ? (
+            <>
+              <AllOpportunitiesFilters
+                filters={filters}
+                onChange={changes => setFilters(prev => ({ ...prev, ...changes }))}
+              />
 
-        <AllOpportunitiesTable
-          opportunities={filtered}
-          loading={loading}
-          onApprove={handleApprove}
-          onReject={handleReject}
-        />
+              <AllOpportunitiesTable
+                opportunities={filtered}
+                loading={loading}
+                onApprove={handleApprove}
+                onReject={handleReject}
+              />
+            </>
+          ) : (
+            <Reports />
+          )}
+        </div>
       </div>
-    </div>
     </div>
   )
 }
