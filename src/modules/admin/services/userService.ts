@@ -26,3 +26,7 @@ export const manageUser = async (
 ): Promise<void> => {
   await api.put("/manage", { email, action });
 };
+
+export const markStudentAsGraduated = async (id: string): Promise<void> => {
+  await api.put(`/graduate/${id}`);
+};

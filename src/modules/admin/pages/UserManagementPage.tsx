@@ -1,7 +1,11 @@
 // src/modules/admin/pages/UserManagementPage.tsx
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAllUsers, manageUser } from "../services/userService";
+import {
+  getAllUsers,
+  manageUser,
+  markStudentAsGraduated,
+} from "../services/userService";
 import type { User } from "../services/userService";
 
 const UserManagementPage: React.FC = () => {
@@ -50,6 +54,20 @@ const UserManagementPage: React.FC = () => {
     } catch (err) {
       console.error("Error managing user:", err);
       setError("Error al realizar la acción");
+    } finally {
+      setActionInProgress(null);
+    }
+  };
+
+  const handleGraduate = async (id: string) => {
+    setActionInProgress(id);
+    setError(null);
+    try {
+      await markStudentAsGraduated(id);
+      await fetchUsers();
+    } catch (err) {
+      console.error("Error marcando como egresado:", err);
+      setError("Error al marcar como egresado");
     } finally {
       setActionInProgress(null);
     }
@@ -254,6 +272,19 @@ const UserManagementPage: React.FC = () => {
                               <span>Eliminar</span>
                             )}
                           </button>
+                          {u.role === "student" && (
+                            <button
+                              onClick={() => handleGraduate(u.id)}
+                              disabled={actionInProgress === u.id}
+                              className="inline-flex items-center px-3 py-1.5 border border-blue-600 text-xs font-medium rounded-full text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-in-out"
+                            >
+                              {actionInProgress === u.id ? (
+                                <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-600"></div>
+                              ) : (
+                                <span>Marcar como egresado</span>
+                              )}
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>

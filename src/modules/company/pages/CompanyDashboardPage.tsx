@@ -1,114 +1,133 @@
 // src/modules/company/pages/CompanyDashboardPage.tsx
-import React, { useState, useEffect, useMemo } from 'react'
-import { useAuth } from '../../auth/hooks/useAuth'
-import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect, useMemo } from "react";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
-import MetricsCards from '../components/MetricsCards'
-import OpportunityList from '../components/OpportunityList'
-import CompanyOpportunityForm from '../components/CompanyOpportunityForm'
-import OpportunityInterestsModal from '../components/OpportunityInterestsModal'
+import MetricsCards from "../components/MetricsCards";
+import OpportunityList from "../components/OpportunityList";
+import CompanyOpportunityForm from "../components/CompanyOpportunityForm";
+import OpportunityInterestsModal from "../components/OpportunityInterestsModal";
 
-import { useOpportunities } from '../hooks/useOpportunities'
-import { getInterestsByOpportunity } from '../services/interestService'
-import type { Opportunity } from '../types/opportunity'
+import { useOpportunities } from "../hooks/useOpportunities";
+import { getInterestsByOpportunity } from "../services/interestService";
+import type { Opportunity } from "../types/opportunity";
 
 const CompanyDashboardPage: React.FC = () => {
-  const { user } = useAuth()
-  const { t } = useTranslation()
-  const companyName = user?.name
+  const { user } = useAuth();
+  const { t } = useTranslation();
+  const companyName = user?.name;
 
   const { opportunities, loading, error, create, update, remove } =
-    useOpportunities(companyName)
+    useOpportunities(companyName);
 
-  const [descriptionFilter, setDescriptionFilter] = useState('')
-  const [dateFrom, setDateFrom] = useState('')
-  const [dateTo, setDateTo] = useState('')
-  const [statusFilter, setStatusFilter] = useState('')
+  const [descriptionFilter, setDescriptionFilter] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
-  const [editing, setEditing] = useState<Opportunity | null>(null)
-  const [showForm, setShowForm] = useState(false)
-  const [showInterests, setShowInterests] = useState<Opportunity | null>(null)
+  const [editing, setEditing] = useState<Opportunity | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [showInterests, setShowInterests] = useState<Opportunity | null>(null);
 
-  const [metrics, setMetrics] = useState({ views: 0, publications: 0 })
+  const [metrics, setMetrics] = useState({ views: 0, publications: 0 });
   useEffect(() => {
-    const pubs = opportunities.length
-    Promise.all(opportunities.map(op => getInterestsByOpportunity(op.uuid)))
-      .then(arrays => {
-        const totalViews = arrays.reduce((sum, arr) => sum + arr.length, 0)
-        setMetrics({ views: totalViews, publications: pubs })
+    const pubs = opportunities.length;
+    Promise.all(opportunities.map((op) => getInterestsByOpportunity(op.uuid)))
+      .then((arrays) => {
+        const totalViews = arrays.reduce((sum, arr) => sum + arr.length, 0);
+        setMetrics({ views: totalViews, publications: pubs });
       })
-      .catch(() => setMetrics({ views: 0, publications: pubs }))
-  }, [opportunities])
+      .catch(() => setMetrics({ views: 0, publications: pubs }));
+  }, [opportunities]);
 
   const filtered = useMemo(() => {
-    return opportunities.filter(op => {
+    return opportunities.filter((op) => {
       const descOk = descriptionFilter
         ? op.description.toLowerCase().includes(descriptionFilter.toLowerCase())
-        : true
-      const d = new Date(op.deadline)
-      const fromOk = dateFrom ? d >= new Date(dateFrom) : true
-      const toOk   = dateTo   ? d <= new Date(dateTo)   : true
-      const statusOk = statusFilter ? op.status === statusFilter : true
-      return descOk && fromOk && toOk && statusOk
-    })
-  }, [opportunities, descriptionFilter, dateFrom, dateTo, statusFilter])
+        : true;
+      const d = new Date(op.deadline);
+      const fromOk = dateFrom ? d >= new Date(dateFrom) : true;
+      const toOk = dateTo ? d <= new Date(dateTo) : true;
+      const statusOk = statusFilter ? op.status === statusFilter : true;
+      return descOk && fromOk && toOk && statusOk;
+    });
+  }, [opportunities, descriptionFilter, dateFrom, dateTo, statusFilter]);
 
-  const handleCreate = async (data: Omit<Opportunity, '_id' | 'createdAt' | 'uuid'>) => {
-    await create(data)
-    setShowForm(false)
-  }
-  const handleUpdate = async (
-    data: Omit<Opportunity, '_id' | 'createdAt' | 'uuid'> & { uuid?: string }
+  const handleCreate = async (
+    data: Omit<Opportunity, "_id" | "createdAt" | "uuid">
   ) => {
-    if (!data.uuid) return
-    await update(data.uuid, data)
-    setEditing(null)
-    setShowForm(false)
-  }
+    await create(data);
+    setShowForm(false);
+  };
+  const handleUpdate = async (
+    data: Omit<Opportunity, "_id" | "createdAt" | "uuid"> & { uuid?: string }
+  ) => {
+    if (!data.uuid) return;
+    await update(data.uuid, data);
+    setEditing(null);
+    setShowForm(false);
+  };
   const handleCancelPub = async (uuid: string) => {
-    await update(uuid, { status: 'closed', forStudents: false })
-  }
+    await update(uuid, { status: "closed", forStudents: false });
+  };
 
   return (
     <>
       {showForm && (
         <div
           className="fixed top-[4rem] inset-x-0 bottom-0 z-40"
-          style={{ backdropFilter: 'blur(4px)' }}
+          style={{ backdropFilter: "blur(4px)" }}
         />
       )}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xl mx-4 relative">
             <button
-              onClick={() => { setShowForm(false); setEditing(null) }}
+              onClick={() => {
+                setShowForm(false);
+                setEditing(null);
+              }}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
               aria-label="Cerrar"
             >
               ✕
             </button>
             <h2 className="text-2xl font-semibold mb-4 text-center">
-              {editing ? t('company.form.editTitle') : t('company.form.newTitle')}
+              {editing
+                ? t("company.form.editTitle")
+                : t("company.form.newTitle")}
             </h2>
             <CompanyOpportunityForm
               initialData={editing ?? undefined}
               onSave={editing ? handleUpdate : handleCreate}
-              onCancel={() => { setShowForm(false); setEditing(null) }}
+              onCancel={() => {
+                setShowForm(false);
+                setEditing(null);
+              }}
               loading={loading}
             />
           </div>
         </div>
       )}
 
-      <div className={`p-6 container mx-auto transition-filter duration-300 ${showForm ? 'filter blur-sm' : ''}`}>
+      <div
+        className={`p-6 container mx-auto transition-filter duration-300 ${
+          showForm ? "filter blur-sm" : ""
+        }`}
+      >
         <div className="bg-white shadow rounded-lg p-6 space-y-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-bold">{t('company.dashboard.title')}</h1>
+            <h1 className="text-4xl font-bold">
+              {t("company.dashboard.title")}
+            </h1>
             <button
-              onClick={() => { setEditing(null); setShowForm(true) }}
+              onClick={() => {
+                setEditing(null);
+                setShowForm(true);
+              }}
               className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
             >
-              + {t('company.dashboard.newOpportunity')}
+              + {t("company.dashboard.newOpportunity")}
             </button>
           </div>
 
@@ -126,10 +145,13 @@ const CompanyDashboardPage: React.FC = () => {
             onDateFrom={setDateFrom}
             onDateTo={setDateTo}
             onStatusFilter={setStatusFilter}
-            onEdit={op => { setEditing(op); setShowForm(true) }}
+            onEdit={(op) => {
+              setEditing(op);
+              setShowForm(true);
+            }}
             onDelete={remove}
             onCancelPublication={handleCancelPub}
-            onShowInterests={op => setShowInterests(op)}
+            onShowInterests={(op) => setShowInterests(op)}
           />
         </div>
       </div>
@@ -140,7 +162,7 @@ const CompanyDashboardPage: React.FC = () => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default CompanyDashboardPage
+export default CompanyDashboardPage;
