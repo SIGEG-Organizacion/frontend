@@ -26,6 +26,8 @@ export interface RegisterStudentData {
   phone_number: string
   password: string
   studentId: string
+  major: string
+  admissionYear: string
 }
 
 export interface RegisterCompanyData {
@@ -34,6 +36,8 @@ export interface RegisterCompanyData {
   password: string
   sector: string
   phone_number: string
+  address: string
+  logo: string
 }
 
 // Administrador registration payload

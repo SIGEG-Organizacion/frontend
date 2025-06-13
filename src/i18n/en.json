@@ -23,6 +23,8 @@
     "title": "Register as Student",
     "name": "Full Name",
     "studentId": "Student ID",
+    "major": "Major",
+    "admissionYear": "Admission Year",
     "email": "Email",
     "phoneNumber": "Phone Number (Include Country Code)",
     "password": "Password",
@@ -35,6 +37,8 @@
   "registerCompany": {
     "title": "Register as Company",
     "companyName": "Company Name",
+    "address": "Address",
+    "logo": "Company Logo URL",
     "sector": "Sector",
     "phone": "Phone Number",
     "email": "Email",

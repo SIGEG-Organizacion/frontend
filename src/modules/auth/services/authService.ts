@@ -44,12 +44,14 @@ const registerStudent = async (
   data: RegisterStudentData
 ): Promise<void> => {
   await api.post('/register', { ...data, role: 'student' })
+  await api.post('/createStudent', { email: data.email, major: data.major, admissionYear: data.admissionYear })
 }
 
 const registerCompany = async (
   data: RegisterCompanyData
 ): Promise<void> => {
   await api.post('/register', { ...data, role: 'company' })
+  await api.post('/createCompany', { email: data.email, sector: data.sector, address: data.address, logo: data.logo })
 }
 
 const registerAdmin = async (

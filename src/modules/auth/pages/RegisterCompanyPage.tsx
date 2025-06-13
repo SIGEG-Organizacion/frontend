@@ -16,6 +16,8 @@ const RegisterCompanyPage: React.FC = () => {
     password: '',
     sector: '',
     phone_number: '',
+    address: '',
+    logo: ''
   })
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -107,6 +109,35 @@ const RegisterCompanyPage: React.FC = () => {
             value={form.email}
             onChange={handleChange}
             required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="address" className="block mb-1 font-medium">
+            {t('registerCompany.address')}
+          </label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            value={form.address}
+            onChange={handleChange}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="logo" className="block mb-1 font-medium">
+            {t('registerCompany.logo')}
+          </label>
+          <input
+            id="logo"
+            name="logo"
+            type="text"
+            value={form.logo}
+            onChange={handleChange}
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           />
         </div>
