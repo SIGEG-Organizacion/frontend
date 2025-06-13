@@ -9,6 +9,12 @@ import {
   exportInterestNumbersExcelBrowser,
   exportInterestNumbersPDFBrowser
 } from '../utils/reportExporter'
+import type {
+  OpportunityNumbersReport,
+  StatusOpportunitiesReport,
+  InterestReport,
+  UserReport
+} from '../utils/reportExporter'
 
 const API_URL = import.meta.env.VITE_API_URL + '/reports'
 const api = axios.create({ baseURL: API_URL })
@@ -36,26 +42,27 @@ interface ReportFilters {
 // Funciones de API con tipos específicos
 export const getOpportunitiesNumbersReport = async (filters: ReportFilters) => {
   const res = await api.get('/numberOpportunitiesCreated', { params: filters })
-  return res.data
+  return res.data.data
 }
 
 export const getOpportunitiesStatusReport = async (filters: ReportFilters) => {
   const res = await api.get('/statusOpportunities', { params: filters })
-  return res.data
+  return res.data.data
 }
 
 export const getInterestReport = async (filters: ReportFilters) => {
   const res = await api.get('/interest', { params: filters })
-  return res.data
+  // Puede venir como { success: true, data: ... }
+  return res.data.data
 }
 
 export const getUsersReport = async (filters: ReportFilters) => {
   const res = await api.get('/users', { params: filters })
-  return res.data
+  return res.data.data
 }
 
 export const downloadReport = async (
-  data: unknown,
+  data: OpportunityNumbersReport | StatusOpportunitiesReport | InterestReport | UserReport,
   filename: string,
   reportType: 'opportunities-numbers' | 'status-opportunities' | 'interest' | 'users',
   format: 'excel' | 'pdf' = 'excel'
@@ -63,30 +70,30 @@ export const downloadReport = async (
   switch (reportType) {
     case 'opportunities-numbers':
       if (format === 'pdf') {
-        exportOpportunityNumbersPDFBrowser(data)
+        exportOpportunityNumbersPDFBrowser(data as OpportunityNumbersReport)
       } else {
-        exportOpportunityNumbersExcelBrowser(data)
+        exportOpportunityNumbersExcelBrowser(data as OpportunityNumbersReport)
       }
       break
     case 'status-opportunities':
       if (format === 'pdf') {
-        exportOpportunityStatsPDFBrowser(data)
+        exportOpportunityStatsPDFBrowser(data as StatusOpportunitiesReport)
       } else {
-        exportOpportunityStatsExcelBrowser(data)
+        exportOpportunityStatsExcelBrowser(data as StatusOpportunitiesReport)
       }
       break
     case 'interest':
       if (format === 'pdf') {
-        exportInterestNumbersPDFBrowser(data)
+        exportInterestNumbersPDFBrowser(data as InterestReport)
       } else {
-        exportInterestNumbersExcelBrowser(data)
+        exportInterestNumbersExcelBrowser(data as InterestReport)
       }
       break
     case 'users':
       if (format === 'pdf') {
-        exportUserStatsPDFBrowser(data)
+        exportUserStatsPDFBrowser(data as UserReport)
       } else {
-        exportUserStatsExcelBrowser(data)
+        exportUserStatsExcelBrowser(data as UserReport)
       }
       break
     default:

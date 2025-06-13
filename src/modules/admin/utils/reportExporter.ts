@@ -387,3 +387,10 @@ function prepareInterestData(report: InterestReport): InterestReport {
     data: cleanData
   } as InterestReport
 }
+
+export type {
+  OpportunityNumbersReport,
+  StatusOpportunitiesReport,
+  InterestReport,
+  UserReport
+}

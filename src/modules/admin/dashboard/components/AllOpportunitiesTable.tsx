@@ -50,7 +50,7 @@ const AllOpportunitiesTable: React.FC<Props> = ({
                   : op.description}
               </td>
               <td className="px-4 py-2">
-                {typeof op.companyId === 'object'
+                {typeof op.companyId === 'object' && op.companyId?.userId?.name
                   ? op.companyId.userId.name
                   : (op as any).companyName}
               </td>

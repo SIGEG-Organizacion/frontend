@@ -13,13 +13,14 @@ i18n
       en: { translation: en },
       es: { translation: es },
     },
-    fallbackLng: 'en',      // Default language if detection fails
-    debug: false,           // true for development
+    fallbackLng: 'es',      // Idioma por defecto si falla la detección
+    lng: 'es',              // Forzar español como idioma inicial
+    debug: true,           // Para ver logs de i18n en consola
     interpolation: {
-      escapeValue: false,   // React already does escaping
+      escapeValue: false,   // React ya hace el escape
     },
     detection: {
-      order: ['querystring', 'localStorage', 'navigator'],
+      order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
     },
   })
