@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getInterestsByOpportunity, Interest as ServiceInterest } from "../services/interestService";
+import {
+  getInterestsByOpportunity,
+  Interest as ServiceInterest,
+} from "../services/interestService";
 import type { Opportunity } from "../types/opportunity";
 
 interface Interest {
@@ -14,7 +17,10 @@ interface Props {
   onClose: () => void;
 }
 
-const OpportunityInterestsModal: React.FC<Props> = ({ opportunity, onClose }) => {
+const OpportunityInterestsModal: React.FC<Props> = ({
+  opportunity,
+  onClose,
+}) => {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,14 +47,22 @@ const OpportunityInterestsModal: React.FC<Props> = ({ opportunity, onClose }) =>
 
   return (
     <>
-      <div className="fixed top-[4rem] inset-x-0 bottom-0 z-40" style={{ backdropFilter: "blur(4px)" }} />
+      <div
+        className="fixed top-[4rem] inset-x-0 bottom-0 z-40"
+        style={{ backdropFilter: "blur(4px)" }}
+      />
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">
               Usuarios interesados en: {opportunity.description}
             </h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-800">✕</button>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-800"
+            >
+              ✕
+            </button>
           </div>
           {loading && <div>Cargando...</div>}
           {error && <div className="text-red-600">{error}</div>}
@@ -65,7 +79,10 @@ const OpportunityInterestsModal: React.FC<Props> = ({ opportunity, onClose }) =>
               <tbody className="divide-y divide-gray-200">
                 {interests.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-6 text-center text-gray-500">
+                    <td
+                      colSpan={4}
+                      className="px-4 py-6 text-center text-gray-500"
+                    >
                       No hay usuarios interesados.
                     </td>
                   </tr>
@@ -75,7 +92,9 @@ const OpportunityInterestsModal: React.FC<Props> = ({ opportunity, onClose }) =>
                       <td className="px-4 py-2">{user.userName}</td>
                       <td className="px-4 py-2">{user.userEmail}</td>
                       <td className="px-4 py-2">{user.userContact || "-"}</td>
-                      <td className="px-4 py-2">{user.graduationDate || "-"}</td>
+                      <td className="px-4 py-2">
+                        {user.graduationDate || "-"}
+                      </td>
                     </tr>
                   ))
                 )}
