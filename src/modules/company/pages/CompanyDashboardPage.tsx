@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import MetricsCards from '../components/MetricsCards'
 import OpportunityList from '../components/OpportunityList'
 import CompanyOpportunityForm from '../components/CompanyOpportunityForm'
+import OpportunityInterestsModal from '../components/OpportunityInterestsModal'
 
 import { useOpportunities } from '../hooks/useOpportunities'
 import { getInterestsByOpportunity } from '../services/interestService'
@@ -26,6 +27,7 @@ const CompanyDashboardPage: React.FC = () => {
 
   const [editing, setEditing] = useState<Opportunity | null>(null)
   const [showForm, setShowForm] = useState(false)
+  const [showInterests, setShowInterests] = useState<Opportunity | null>(null)
 
   const [metrics, setMetrics] = useState({ views: 0, publications: 0 })
   useEffect(() => {
@@ -116,23 +118,27 @@ const CompanyDashboardPage: React.FC = () => {
             opportunities={filtered}
             loading={loading}
             error={error}
-
             descriptionFilter={descriptionFilter}
             dateFrom={dateFrom}
             dateTo={dateTo}
             statusFilter={statusFilter}
-
             onDescriptionFilter={setDescriptionFilter}
             onDateFrom={setDateFrom}
             onDateTo={setDateTo}
             onStatusFilter={setStatusFilter}
-
             onEdit={op => { setEditing(op); setShowForm(true) }}
             onDelete={remove}
             onCancelPublication={handleCancelPub}
+            onShowInterests={op => setShowInterests(op)}
           />
         </div>
       </div>
+      {showInterests && (
+        <OpportunityInterestsModal
+          opportunity={showInterests}
+          onClose={() => setShowInterests(null)}
+        />
+      )}
     </>
   )
 }
