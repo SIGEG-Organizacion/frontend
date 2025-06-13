@@ -159,20 +159,6 @@ const Reports: React.FC = () => {
               className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-2 py-1"
             />
           </div>
-          {/* Formato */}
-          <div className="flex flex-col">
-            <label className="text-xs font-medium text-gray-700 mb-1">
-              {t("admin.reports.format", "Formato")}
-            </label>
-            <select
-              value={format}
-              onChange={(e) => setFormat(e.target.value as ReportFormat)}
-              className="rounded-md border-gray-300 shadow-sm px-2 py-1"
-            >
-              <option value="excel">Excel</option>
-              <option value="pdf">PDF</option>
-            </select>
-          </div>
           {/* Empresa */}
           <div className="flex flex-col">
             <label className="text-xs font-medium text-gray-700 mb-1">
@@ -347,20 +333,6 @@ const Reports: React.FC = () => {
           <p className="text-gray-500 text-sm mb-4">
             {t("admin.reports.opportunitiesNumbersDesc")}
           </p>
-          <button
-            onClick={() => {
-              handleGenerateReport("numbers");
-              setSelectedReport("numbers");
-            }}
-            disabled={!!loading}
-            className="inline-flex items-center px-4 py-2 border border-green-600 text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 w-full justify-center"
-          >
-            {loading === "numbers" ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600" />
-            ) : (
-              `Descargar ${format.toUpperCase()}`
-            )}
-          </button>
         </div>
 
         {/* Reporte de Estado de Oportunidades */}
@@ -371,20 +343,6 @@ const Reports: React.FC = () => {
           <p className="text-gray-500 text-sm mb-4">
             {t("admin.reports.opportunitiesStatusDesc")}
           </p>
-          <button
-            onClick={() => {
-              handleGenerateReport("status");
-              setSelectedReport("status");
-            }}
-            disabled={!!loading}
-            className="inline-flex items-center px-4 py-2 border border-green-600 text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 w-full justify-center"
-          >
-            {loading === "status" ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600" />
-            ) : (
-              `Descargar ${format.toUpperCase()}`
-            )}
-          </button>
         </div>
 
         {/* Reporte de Intereses */}
@@ -393,20 +351,6 @@ const Reports: React.FC = () => {
           <p className="text-gray-500 text-sm mb-4">
             {t("admin.reports.interestsDesc")}
           </p>
-          <button
-            onClick={() => {
-              handleGenerateReport("interest");
-              setSelectedReport("interest");
-            }}
-            disabled={!!loading}
-            className="inline-flex items-center px-4 py-2 border border-green-600 text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 w-full justify-center"
-          >
-            {loading === "interest" ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600" />
-            ) : (
-              `Descargar ${format.toUpperCase()}`
-            )}
-          </button>
         </div>
 
         {/* Reporte de Usuarios */}
@@ -415,20 +359,6 @@ const Reports: React.FC = () => {
           <p className="text-gray-500 text-sm mb-4">
             {t("admin.reports.usersDesc")}
           </p>
-          <button
-            onClick={() => {
-              handleGenerateReport("users");
-              setSelectedReport("users");
-            }}
-            disabled={!!loading}
-            className="inline-flex items-center px-4 py-2 border border-green-600 text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 w-full justify-center"
-          >
-            {loading === "users" ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600" />
-            ) : (
-              `Descargar ${format.toUpperCase()}`
-            )}
-          </button>
         </div>
       </div>
     </div>
