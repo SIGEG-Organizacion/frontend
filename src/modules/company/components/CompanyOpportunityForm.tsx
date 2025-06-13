@@ -36,8 +36,8 @@ const CompanyOpportunityForm: React.FC<Props> = ({
   const [deadline, setDeadline] = useState(
     initialData?.deadline?.slice(0, 10) ?? ""
   );
-  const [flyerFormat, setFlyerFormat] = useState<"JPG" | "">(
-    (initialData?.format?.toUpperCase() as "JPG") ?? ""
+  const [flyerFormat, setFlyerFormat] = useState<"PDF" | "JPG" | "">(
+    initialData?.format ?? ""
   );
   const [forStudents, setForStudents] = useState(
     initialData?.forStudents ?? false
@@ -53,7 +53,7 @@ const CompanyOpportunityForm: React.FC<Props> = ({
     formData.append("mode", mode);
     formData.append("email", email);
     formData.append("deadline", deadline);
-    formData.append("format", flyerFormat || "JPG"); // Default value: JPG
+    formData.append("format", flyerFormat || "PDF"); // Valor por defecto: PDF
     formData.append("forStudents", String(forStudents));
 
     if (imageFile) {
@@ -80,8 +80,7 @@ const CompanyOpportunityForm: React.FC<Props> = ({
     }
 
     try {
-      // Remove the any cast and use the proper type for formData
-      await onSave(Object.fromEntries(formData.entries()) as unknown as Omit<Opportunity, "_id" | "createdAt" | "uuid"> & { uuid?: string });
+      await onSave(formData as any);
     } catch (error) {
       console.error("Error al enviar la oportunidad:", error);
     }
@@ -177,12 +176,13 @@ const CompanyOpportunityForm: React.FC<Props> = ({
           <select
             value={flyerFormat}
             onChange={(e) =>
-              setFlyerFormat(e.target.value as "JPG" | "")
+              setFlyerFormat(e.target.value as "PDF" | "JPG" | "")
             }
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           >
             <option value="">{t("company.form.selectFormat")}</option>
+            <option value="PDF">PDF</option>
             <option value="JPG">JPG</option>
           </select>
         </div>

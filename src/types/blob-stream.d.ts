@@ -1,4 +1,4 @@
-declare module 'blob-stream' {
+declare module "blob-stream" {
   interface BlobStream {
     pipe(dest: any): BlobStream;
     on(event: string, callback: (blob: Blob) => void): void;
