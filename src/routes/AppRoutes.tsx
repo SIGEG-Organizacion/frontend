@@ -13,15 +13,12 @@ import ForgotPasswordPage from "../modules/auth/pages/ForgotPasswordPage";
 import NotFoundPage from "../common/pages/404";
 import ProfilePage from "../common/pages/ProfilePage";
 import UserManagementPage from "../modules/admin/pages/UserManagementPage";
-import CalendarSyncPage from "../modules/calendar/pages/CalendarSyncPage";
-import CalendarCallbackPage from "../modules/calendar/pages/CalendarCallbackPage";
-import CalendarViewPage from "../modules/calendar/pages/CalendarViewPage";
-import CalendarRequestsPage from "../modules/calendar/pages/CalendarRequestsPage";
 import CompanyDashboardPage from "../modules/company/pages/CompanyDashboardPage";
 import OpportunitiesPage from "../modules/opportunities/pages/OpportunitiesPage";
 import OpportunityDetailPage from "../modules/opportunities/pages/OpportunityDetailPage";
 import MyInterestsPage from "../modules/interests/pages/MyInsterestsPage";
 import AdminDashboardPage from "../modules/admin/dashboard/pages/AdminDashboardPage";
+// import AdminCalendarPage from "../modules/admin/calendar/pages/AdminCalendarPage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -73,16 +70,7 @@ const AppRoutes: React.FC = () => {
                 element={<OpportunityDetailPage />}
               />
 
-              <Route path="/calendar" element={<CalendarViewPage />} />
-              <Route path="/calendar/sync" element={<CalendarSyncPage />} />
-              <Route
-                path="/calendar/oauth/callback/:provider"
-                element={<CalendarCallbackPage />}
-              />
-              <Route
-                path="/calendar/requests"
-                element={<CalendarRequestsPage />}
-              />
+              {/* <Route path="/admin/calendar" element={<AdminCalendarPage />} /> */}
             </>
           )}
 
