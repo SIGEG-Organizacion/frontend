@@ -16,6 +16,8 @@ const RegisterStudentPage: React.FC = () => {
     phone_number: '',
     password: '',
     studentId: '',
+    major: '',
+    admissionYear: ''
   })
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -105,6 +107,36 @@ const RegisterStudentPage: React.FC = () => {
             name="email"
             type="email"
             value={form.email}
+            onChange={handleChange}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="major" className="block mb-1 font-medium">
+            {t('registerStudent.major')}
+          </label>
+          <input
+            id="major"
+            name="major"
+            type="text"
+            value={form.major}
+            onChange={handleChange}
+            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="admissionYear" className="block mb-1 font-medium">
+            {t('registerStudent.admissionYear')}
+          </label>
+          <input
+            id="admissionYear"
+            name="admissionYear"
+            type="text"
+            value={form.admissionYear}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
