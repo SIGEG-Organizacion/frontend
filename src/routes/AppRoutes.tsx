@@ -18,6 +18,8 @@ import OpportunitiesPage from "../modules/opportunities/pages/OpportunitiesPage"
 import OpportunityDetailPage from "../modules/opportunities/pages/OpportunityDetailPage";
 import MyInterestsPage from "../modules/interests/pages/MyInsterestsPage";
 import AdminDashboardPage from "../modules/admin/dashboard/pages/AdminDashboardPage";
+import SupportPage from "../modules/support/pages/SupportPage";
+import ReportProblemPage from "../modules/support/pages/ReportProblemPage";
 // import AdminCalendarPage from "../modules/admin/calendar/pages/AdminCalendarPage";
 
 const AppRoutes: React.FC = () => {
@@ -40,6 +42,10 @@ const AppRoutes: React.FC = () => {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/not-found" element={<NotFoundPage />} />
+
+          {/* Support routes */}
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/support/report" element={<ReportProblemPage />} />
 
           {user?.role === "student" || user?.role === "graduate" ? (
             <>

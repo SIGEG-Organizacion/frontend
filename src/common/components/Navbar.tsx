@@ -27,6 +27,10 @@ const Navbar: React.FC = () => {
               {t("navbar.home")}
             </Link>
 
+            <Link to="/support" className="hover:underline">
+              {t("navbar.support")}
+            </Link>
+
             {user ? (
               <>
                 {/* Opciones según rol */}

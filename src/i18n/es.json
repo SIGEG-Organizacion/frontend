@@ -67,7 +67,8 @@
     "logout": "Cerrar Sesión",
     "calendar": "Agenda",
     "publications": "Oportunidades",
-    "myInterests": "Mis Intereses"
+    "myInterests": "Mis Intereses",
+    "support": "Soporte"
   },
   "home": {
     "welcome": "¡Bienvenido, {{name}}!",
@@ -335,6 +336,49 @@
         "approve": "Aprobar",
         "reject": "Rechazar"
       }
+    }
+  },
+  "support": {
+    "title": "Soporte",
+    "contact": {
+      "title": "Información de Contacto",
+      "technical": "Soporte Técnico",
+      "phone": "2000-0000"
+    },
+    "actions": {
+      "title": "Acciones",
+      "reportProblem": "Reportar un Problema"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "guide": {
+        "title": "Guía de uso para Publicaciones y Agenda",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. de métricas y reportes"
+      }
+    },
+    "report": {
+      "title": "Reportar un Problema",
+      "form": {
+        "title": "Título del Problema",
+        "description": "Descripción del Problema",
+        "category": "Categoría",
+        "priority": "Prioridad",
+        "submit": "Enviar Reporte",
+        "cancel": "Cancelar"
+      },
+      "categories": {
+        "technical": "Problema Técnico",
+        "access": "Problema de Acceso",
+        "data": "Problema con Datos",
+        "other": "Otro"
+      },
+      "priorities": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta"
+      },
+      "success": "¡Reporte Enviado!",
+      "successMessage": "Tu reporte ha sido enviado correctamente. Serás redirigido en unos momentos."
     }
   }
 }
