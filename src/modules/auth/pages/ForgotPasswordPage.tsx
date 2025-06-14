@@ -1,50 +1,42 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import ValidationMessage from '../components/ValidationMessage'
-import authService from '../services/authService'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import authService from "../services/authService";
 
 const ForgotPasswordPage: React.FC = () => {
-  const { t } = useTranslation()
-  const [email, setEmail] = useState<string>('')
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const { t, i18n } = useTranslation();
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setSuccess(null)
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     try {
-      await authService.forgotPassword({ email })
-      setSuccess(t('forgotPassword.success'))
+      await authService.forgotPassword({ email });
     } catch (err: any) {
-      setError(err.response?.data?.message ?? err.message)
+      // No importa si hay error, siempre mostrar el popup
     } finally {
-      setLoading(false)
+      setShowPopup(true);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        {t('forgotPassword.title')}
+        {t("forgotPassword.title")}
       </h1>
-
-      {error && <ValidationMessage type="error">{error}</ValidationMessage>}
-      {success && <ValidationMessage type="success">{success}</ValidationMessage>}
-
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block mb-1 font-medium">
-            {t('forgotPassword.email')}
+            {t("forgotPassword.email")}
           </label>
           <input
             id="email"
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
           />
@@ -54,17 +46,35 @@ const ForgotPasswordPage: React.FC = () => {
           disabled={loading}
           className="w-full py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
         >
-          {loading ? t('forgotPassword.loading') : t('forgotPassword.submit')}
+          {loading ? t("forgotPassword.loading") : t("forgotPassword.submit")}
         </button>
       </form>
 
       <div className="mt-4 text-center text-sm">
         <Link to="/login" className="text-gray-600 hover:underline">
-          {t('forgotPassword.backToLogin')}
+          {t("forgotPassword.backToLogin")}
         </Link>
       </div>
-    </div>
-  )
-}
 
-export default ForgotPasswordPage
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+          <div className="bg-white p-6 rounded shadow-lg text-center">
+            <p className="mb-4">
+              {i18n.language.startsWith("es")
+                ? "Si el correo existe, se ha enviado una nueva contraseña a tu correo electrónico."
+                : "If the email exists, a new password has been sent to your email address."}
+            </p>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded"
+              onClick={() => setShowPopup(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ForgotPasswordPage;
