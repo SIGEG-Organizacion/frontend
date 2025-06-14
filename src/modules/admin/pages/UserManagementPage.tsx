@@ -59,14 +59,13 @@ const UserManagementPage: React.FC = () => {
     }
   };
 
-  const handleGraduate = async (id: string) => {
-    setActionInProgress(id);
+  const handleGraduate = async (email: string) => {
+    setActionInProgress(email);
     setError(null);
     try {
-      await markStudentAsGraduated(id);
+      await markStudentAsGraduated(email);
       await fetchUsers();
     } catch (err) {
-      console.error("Error marcando como egresado:", err);
       setError("Error al marcar como egresado");
     } finally {
       setActionInProgress(null);
@@ -226,7 +225,10 @@ const UserManagementPage: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                          {t(`userMgmt.role.${u.role}`)}
+                          {t(`userMgmt.role.${u.role}`) ===
+                          `userMgmt.role.${u.role}`
+                            ? u.role.charAt(0).toUpperCase() + u.role.slice(1)
+                            : t(`userMgmt.role.${u.role}`)}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -274,11 +276,11 @@ const UserManagementPage: React.FC = () => {
                           </button>
                           {u.role === "student" && (
                             <button
-                              onClick={() => handleGraduate(u.id)}
-                              disabled={actionInProgress === u.id}
+                              onClick={() => handleGraduate(u.email)}
+                              disabled={actionInProgress === u.email}
                               className="inline-flex items-center px-3 py-1.5 border border-blue-600 text-xs font-medium rounded-full text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-in-out"
                             >
-                              {actionInProgress === u.id ? (
+                              {actionInProgress === u.email ? (
                                 <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-600"></div>
                               ) : (
                                 <span>Marcar como egresado</span>

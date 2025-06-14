@@ -122,13 +122,16 @@
       "student": "Student",
       "company": "Company",
       "adminTGF": "TFG Administrator",
-      "adminLink": "Linkage Administrator"
+      "adminLink": "Linkage Administrator",
+      "graduate": "Graduate"
     },
     "actions": {
       "delete": "Delete",
       "graduate": "Mark Graduated"
     },
-    "confirmDelete": "Are you sure you want to delete this user?"
+    "confirmDelete": "Are you sure you want to delete this user?",
+    "search": "Search",
+    "filter": "Filter by role"
   },
   "calendar": {
     "title": "Calendar",

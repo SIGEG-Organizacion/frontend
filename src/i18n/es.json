@@ -122,13 +122,16 @@
       "student": "Estudiante",
       "company": "Empresa",
       "adminTGF": "Administrador TFG",
-      "adminLink": "Administrador Vinculación"
+      "adminLink": "Administrador Vinculación",
+      "graduate": "Egresado"
     },
     "actions": {
       "delete": "Eliminar",
       "graduate": "Cambiar a egresado"
     },
-    "confirmDelete": "¿Seguro que deseas eliminar este usuario?"
+    "confirmDelete": "¿Seguro que deseas eliminar este usuario?",
+    "search": "Buscar",
+    "filter": "Filtrar por rol"
   },
   "calendar": {
     "requests": {

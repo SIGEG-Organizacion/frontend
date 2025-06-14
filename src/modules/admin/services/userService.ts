@@ -27,6 +27,12 @@ export const manageUser = async (
   await api.put("/manage", { email, action });
 };
 
-export const markStudentAsGraduated = async (id: string): Promise<void> => {
-  await api.put(`/graduate/${id}`);
+export const markStudentAsGraduated = async (email: string): Promise<void> => {
+  await axios.put(
+    `${import.meta.env.VITE_API_URL}/students/graduate/${email}`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
 };
