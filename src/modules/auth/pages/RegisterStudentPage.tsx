@@ -29,6 +29,17 @@ const RegisterStudentPage: React.FC = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Validación de contraseña
+  const isPasswordValid = (password: string) => {
+    return (
+      password.length >= 8 &&
+      /[A-Z]/.test(password) &&
+      /[a-z]/.test(password) &&
+      /[0-9]/.test(password) &&
+      /[^A-Za-z0-9]/.test(password)
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -121,15 +132,105 @@ const RegisterStudentPage: React.FC = () => {
           <label htmlFor="major" className="block mb-1 font-medium">
             {t("registerStudent.major")}
           </label>
-          <input
+          <select
             id="major"
             name="major"
-            type="text"
             value={form.major}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
-          />
+          >
+            <option value="">{t("registerStudent.selectMajorCode")}</option>
+            <option value="ARH">ARH</option>
+            <option value="AEN">AEN</option>
+            <option value="MRN">MRN</option>
+            <option value="DP">DP</option>
+            <option value="GPM">GPM</option>
+            <option value="DCS">DCS</option>
+            <option value="CND">CND</option>
+            <option value="IMT">IMT</option>
+            <option value="ATI">ATI</option>
+            <option value="DAI">DAI</option>
+            <option value="DDE">DDE</option>
+            <option value="ET">ET</option>
+            <option value="EM">EM</option>
+            <option value="EMA">EMA</option>
+            <option value="AU">AU</option>
+            <option value="AE">AE</option>
+            <option value="AIT">AIT</option>
+            <option value="AA">AA</option>
+            <option value="AN">AN</option>
+            <option value="BI">BI</option>
+            <option value="ME">ME</option>
+            <option value="CI">CI</option>
+            <option value="ECE">ECE</option>
+            <option value="CS">CS</option>
+            <option value="SCC">SCC</option>
+            <option value="CD">CD</option>
+            <option value="FI">FI</option>
+            <option value="EIC">EIC</option>
+            <option value="MI">MI</option>
+            <option value="CA">CA</option>
+            <option value="CES">CES</option>
+            <option value="CO">CO</option>
+            <option value="E">E</option>
+            <option value="EMT">EMT</option>
+            <option value="PI">PI</option>
+            <option value="SHO">SHO</option>
+            <option value="MA">MA</option>
+            <option value="QU">QU</option>
+            <option value="DI">DI</option>
+            <option value="IA">IA</option>
+            <option value="AG">AG</option>
+            <option value="FO">FO</option>
+            <option value="FH">FH</option>
+            <option value="GTR">GTR</option>
+            <option value="GTS">GTS</option>
+            <option value="GST">GST</option>
+            <option value="AAL">AAL</option>
+            <option value="AMB">AMB</option>
+            <option value="IB">IB</option>
+            <option value="IDC">IDC</option>
+            <option value="IM">IM</option>
+            <option value="DIL">DIL</option>
+            <option value="AEL">AEL</option>
+            <option value="EML">EML</option>
+            <option value="LEM">LEM</option>
+            <option value="IAL">IAL</option>
+            <option value="AGL">AGL</option>
+            <option value="COL">COL</option>
+            <option value="EL">EL</option>
+            <option value="MIL">MIL</option>
+            <option value="MEL">MEL</option>
+            <option value="PIL">PIL</option>
+            <option value="SOL">SOL</option>
+            <option value="FOL">FOL</option>
+            <option value="IBL">IBL</option>
+            <option value="AEM">AEM</option>
+            <option value="MCS">MCS</option>
+            <option value="DE">DE</option>
+            <option value="MIM">MIM</option>
+            <option value="MQT">MQT</option>
+            <option value="MCT">MCT</option>
+            <option value="FOM">FOM</option>
+            <option value="MC">MC</option>
+            <option value="DEL">DEL</option>
+            <option value="MDM">MDM</option>
+            <option value="ETM">ETM</option>
+            <option value="ELM">ELM</option>
+            <option value="MIV">MIV</option>
+            <option value="MIE">MIE</option>
+            <option value="SOM">SOM</option>
+            <option value="PIM">PIM</option>
+            <option value="MCA">MCA</option>
+            <option value="PCA">PCA</option>
+            <option value="PCS">PCS</option>
+            <option value="SP">SP</option>
+            <option value="IF">IF</option>
+            <option value="CDC">CDC</option>
+            <option value="CDD">CDD</option>
+            <option value="DVE">DVE</option>
+          </select>
         </div>
 
         <div>
@@ -157,6 +258,14 @@ const RegisterStudentPage: React.FC = () => {
             value={form.password}
             onChange={handleChange}
           />
+          <div className="text-xs text-gray-500 mt-1">
+            {t("registerStudent.passwordRequirements")}
+          </div>
+          {form.password && !isPasswordValid(form.password) && (
+            <div className="text-xs text-red-600 mt-1">
+              {t("registerStudent.passwordInvalid")}
+            </div>
+          )}
         </div>
 
         <button

@@ -32,7 +32,10 @@
     "loading": "Registering...",
     "success": "Registration successful! You can now log in.",
     "alreadyHave": "Already have an account?",
-    "login": "Sign In"
+    "login": "Sign In",
+    "selectMajorCode": "Select a major by code",
+    "passwordRequirements": "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a symbol.",
+    "passwordInvalid": "Password does not meet the requirements."
   },
   "registerCompany": {
     "title": "Register as Company",

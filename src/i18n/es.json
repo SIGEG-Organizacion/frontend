@@ -32,7 +32,10 @@
     "loading": "Registrando...",
     "success": "¡Registro exitoso! Ya puedes iniciar sesión.",
     "alreadyHave": "¿Ya tienes cuenta?",
-    "login": "Iniciar Sesión"
+    "login": "Iniciar Sesión",
+    "selectMajorCode": "Selecciona una carrera por código",
+    "passwordRequirements": "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.",
+    "passwordInvalid": "La contraseña no cumple con los requisitos."
   },
   "registerCompany": {
     "title": "Registro de Empresa",
