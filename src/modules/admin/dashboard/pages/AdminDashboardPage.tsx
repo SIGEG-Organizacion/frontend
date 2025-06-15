@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import StatsCards from "../components/StatsCards";
 import AllOpportunitiesFilters from "../components/AllOpportunitiesFilters";
 import AllOpportunitiesTable from "../components/AllOpportunitiesTable";
-import Reports from "../../components/Reports";
 import { useAdminDashboard } from "../hooks/useAdminDashboard";
 import type { Opportunity } from "../../../opportunities/types/opportunity";
 import { updateOpportunityStatus } from "../services/adminDashboardService";
@@ -95,19 +94,6 @@ const AdminDashboardPage: React.FC = () => {
               >
                 {t("admin.dashboard.opportunitiesTitle")}
               </button>
-              <button
-                onClick={() => setActiveTab("reports")}
-                className={`
-                  py-4 px-1 border-b-2 font-medium text-sm
-                  ${
-                    activeTab === "reports"
-                      ? "border-blue-500 text-blue-600"
-                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  }
-                `}
-              >
-                {t("admin.dashboard.reportsTitle")}
-              </button>
             </nav>
           </div>
 
@@ -127,9 +113,7 @@ const AdminDashboardPage: React.FC = () => {
                 onReject={handleReject}
               />
             </>
-          ) : (
-            <Reports />
-          )}
+          ) : null}
         </div>
       </div>
     </div>

@@ -53,6 +53,10 @@ const Navbar: React.FC = () => {
                       {t("navbar.dashboard")}
                     </Link>
 
+                    <Link to="/company/guide" className="hover:underline">
+                      {t("navbar.companyGuide")}
+                    </Link>
+
                     <Link to="/profile" className="hover:underline">
                       {t("navbar.profile")}
                     </Link>
@@ -66,6 +70,29 @@ const Navbar: React.FC = () => {
 
                     <Link to="/interests" className="hover:underline">
                       {t("navbar.myInterests")}
+                    </Link>
+
+                    <Link to="/user-guide" className="hover:underline">
+                      {t("navbar.userGuide")}
+                    </Link>
+
+                    <Link to="/profile" className="hover:underline">
+                      {t("navbar.profile")}
+                    </Link>
+                  </>
+                )}
+                {user.role === "graduate" && (
+                  <>
+                    <Link to="/opportunities" className="hover:underline">
+                      {t("navbar.publications")}
+                    </Link>
+
+                    <Link to="/interests" className="hover:underline">
+                      {t("navbar.myInterests")}
+                    </Link>
+
+                    <Link to="/user-guide" className="hover:underline">
+                      {t("navbar.userGuide")}
                     </Link>
 
                     <Link to="/profile" className="hover:underline">

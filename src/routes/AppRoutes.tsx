@@ -20,7 +20,9 @@ import MyInterestsPage from "../modules/interests/pages/MyInsterestsPage";
 import AdminDashboardPage from "../modules/admin/dashboard/pages/AdminDashboardPage";
 import SupportPage from "../modules/support/pages/SupportPage";
 import ReportProblemPage from "../modules/support/pages/ReportProblemPage";
+import CompanyGuidePage from "../modules/company/pages/CompanyGuidePage";
 // import AdminCalendarPage from "../modules/admin/calendar/pages/AdminCalendarPage";
+import UserGuidePage from "../modules/common/pages/UserGuidePage";
 
 const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -47,6 +49,10 @@ const AppRoutes: React.FC = () => {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/support/report" element={<ReportProblemPage />} />
 
+          {(user?.role === "student" || user?.role === "graduate") && (
+            <Route path="/user-guide" element={<UserGuidePage />} />
+          )}
+
           {user?.role === "student" || user?.role === "graduate" ? (
             <>
               <Route path="/opportunities" element={<OpportunitiesPage />} />
@@ -62,6 +68,7 @@ const AppRoutes: React.FC = () => {
           {user?.role === "company" && (
             <>
               <Route path="/dashboard" element={<CompanyDashboardPage />} />
+              <Route path="/company/guide" element={<CompanyGuidePage />} />
             </>
           )}
 

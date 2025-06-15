@@ -71,7 +71,9 @@
     "calendar": "Agenda",
     "publications": "Oportunidades",
     "myInterests": "Mis Intereses",
-    "support": "Soporte"
+    "support": "Soporte",
+    "companyGuide": "Guía Empresa",
+    "userGuide": "Guía de Usuario"
   },
   "home": {
     "welcome": "¡Bienvenido, {{name}}!",
@@ -296,7 +298,9 @@
         "open": "Abierta",
         "closed": "Cerrada",
         "pending-approval": "Pendiente de aprobación"
-      }
+      },
+      "markInterest": "Marcar como interesado",
+      "unmarkInterest": "Quitar interés"
     }
   },
   "admin": {
@@ -385,6 +389,47 @@
       },
       "success": "¡Reporte Enviado!",
       "successMessage": "Tu reporte ha sido enviado correctamente. Serás redirigido en unos momentos."
+    }
+  },
+  "userGuide": {
+    "student": {
+      "title": "¿Cómo buscar y marcar interés en oportunidades?",
+      "steps": [
+        "Ve a la sección 'Oportunidades' desde el menú.",
+        "Filtra y explora las oportunidades disponibles.",
+        "Haz clic en una oportunidad para ver los detalles.",
+        "Usa el botón 'Marcar como interesado' para guardar tu interés.",
+        "Consulta tus intereses en la sección 'Mis Intereses'."
+      ]
+    },
+    "graduate": {
+      "title": "¿Cómo aprovechar las oportunidades como egresado?",
+      "steps": [
+        "Accede a 'Oportunidades' para ver vacantes abiertas.",
+        "Marca interés en las oportunidades que te interesen.",
+        "Revisa y gestiona tus intereses en 'Mis Intereses'.",
+        "Mantén tu perfil actualizado para recibir mejores ofertas."
+      ]
+    }
+  },
+  "companyGuide": {
+    "title": "Guía para Empresas",
+    "createOpportunity": {
+      "title": "¿Cómo crear una oportunidad?",
+      "steps": [
+        "Ingresa al panel de empresa desde el menú.",
+        "Haz clic en 'Nueva Oportunidad'.",
+        "Completa el formulario con la información solicitada.",
+        "Guarda la oportunidad para que sea revisada y publicada."
+      ]
+    },
+    "viewInterests": {
+      "title": "¿Cómo ver los interesados en una oportunidad?",
+      "steps": [
+        "En el panel de empresa, busca la oportunidad publicada.",
+        "Haz clic en el botón 'Ver intereses' junto a la oportunidad.",
+        "Se mostrará una lista de usuarios interesados con su información de contacto."
+      ]
     }
   }
 }

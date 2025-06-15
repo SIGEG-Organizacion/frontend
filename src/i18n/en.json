@@ -70,7 +70,9 @@
     "logout": "Log Out",
     "calendar": "Calendar",
     "publications": "Opportunities",
-    "myInterests": "My Interests"
+    "myInterests": "My Interests",
+    "companyGuide": "Company Guide",
+    "userGuide": "User Guide"
   },
   "home": {
     "welcome": "Welcome, {{name}}!",
@@ -288,7 +290,7 @@
       "yes": "Yes",
       "no": "No",
       "markInterest": "Mark as Interested",
-      "unmarkInterest": "Unmark Interest",
+      "unmarkInterest": "Remove Interest",
       "modeList": {
         "remote": "Remote",
         "onsite": "On-site",
@@ -344,6 +346,56 @@
         "approve": "Approve",
         "reject": "Reject"
       }
+    }
+  },
+  "userGuide": {
+    "student": {
+      "title": "How to search and mark interest in opportunities?",
+      "steps": [
+        "Go to the 'Opportunities' section from the menu.",
+        "Filter and explore available opportunities.",
+        "Click on an opportunity to see details.",
+        "Use the 'Mark as Interested' button to save your interest.",
+        "Check your interests in the 'My Interests' section."
+      ]
+    },
+    "graduate": {
+      "title": "How to take advantage of opportunities as a graduate?",
+      "steps": [
+        "Access 'Opportunities' to see open vacancies.",
+        "Mark interest in the opportunities you like.",
+        "Review and manage your interests in 'My Interests'.",
+        "Keep your profile updated for better offers."
+      ]
+    },
+    "company": {
+      "title": "How to manage your company profile and opportunities?",
+      "steps": [
+        "Sign in to your company account.",
+        "Complete your company profile with accurate information.",
+        "Go to the 'Opportunities' section to create or manage job postings.",
+        "Use the analytics on your dashboard to track views and applications."
+      ]
+    }
+  },
+  "companyGuide": {
+    "title": "Company Guide",
+    "createOpportunity": {
+      "title": "How to create an opportunity?",
+      "steps": [
+        "Go to the company dashboard from the menu.",
+        "Click on 'New Opportunity'.",
+        "Fill out the form with the required information.",
+        "Save the opportunity to be reviewed and published."
+      ]
+    },
+    "viewInterests": {
+      "title": "How to view interested users in an opportunity?",
+      "steps": [
+        "In the company dashboard, find the published opportunity.",
+        "Click the 'View Interests' button next to the opportunity.",
+        "A list of interested users with their contact information will be displayed."
+      ]
     }
   }
 }
